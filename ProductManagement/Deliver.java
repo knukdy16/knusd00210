@@ -1,17 +1,11 @@
-package ProductManagement; // ÇÑ±Û·Î ¹°Ç°°ü¸®
+package ProductManagement; // í•œê¸€ë¡œ ë¬¼í’ˆê´€ë¦¬
 
-import java.util.Scanner;
-import java.io.IOException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-
-public class Deliver { // ÇÑ±Û·Î Ãâ°í
+public class Deliver { // í•œê¸€ë¡œ ì¶œê³ 
 	/*
-		ÇöÀç status
-	- get, set method ÀÛ¼º ¿Ï·á
-	- constructor ÀÛ¼º ¿Ï·á. Å×½ºÆ® ÇÊ¿ä
-	- ¹°Ç°¸ñ·ÏÀúÀå, ¹°Ç°¸ñ·Ï°»½Å method ÀÛ¼ºÁß.
+		í˜„ì¬ status
+	- get, set method ì‘ì„± ì™„ë£Œ
+	- constructor ì‘ì„± ì™„ë£Œ. í…ŒìŠ¤íŠ¸ í•„ìš”
+	- ë¬¼í’ˆëª©ë¡ì €ì¥, ë¬¼í’ˆëª©ë¡ê°±ì‹  method ì‘ì„±ì¤‘.
 	 */
 	private int deliverPrice;
 	private int deliverAmount;
@@ -20,7 +14,7 @@ public class Deliver { // ÇÑ±Û·Î Ãâ°í
 	private String deliverCode;
 	private String deliverClient;
 	
-	static public void main(String args[]) throws IOException, InterruptedException {
+	static public void main(String args[]) {
 		Deliver Temp = new Deliver();
 		Temp.inputDeliver();
 	}
@@ -94,16 +88,25 @@ public class Deliver { // ÇÑ±Û·Î Ãâ°í
 	
 	public void inputDeliver() {
 		Product LoadProduct = ProductList._searchProduct();
-		LoadProduct.updateProductList(null, this.getAmount(), -1); // Á¤º¸ ¾÷µ¥ÀÌÆ®
-		saveDeliver(this); // ¸Ç ¸¶Áö¸·¿¡ ½Ç½Ã
+		LoadProduct.updateProductList(null, this.getAmount(), -1); // ì •ë³´ ì—…ë°ì´íŠ¸
+		saveDeliver(this); // ë§¨ ë§ˆì§€ë§‰ì— ì‹¤ì‹œ
 	}
 	
-	public void searchDeliver() {
-		
+	public Deliver searchDeliver() {
+		Deliver result = null;
+		return result;
 	}
 	
-	private void saveDeliver(Deliver Input) { // »ı¼ºÇÑ class¸¦ file·Î ÀúÀå
-		System.out.println("ÀÌ method´Â Ãâ°í Á¤º¸¸¦ file¿¡ ÀúÀå½ÃÅµ´Ï´Ù.");
+	public int returnTotalDeliverAmount(String BarCode) {
+		// fileë¡œë¶€í„° dataë¥¼ loadí•´ì„œ returnë°›ì€ Arrayë¥¼ Listì— ì €ì¥.
+		// ê·¸ í›„ ì…ë ¥ë°›ì€ Barcodeë¥¼ ë°”íƒ•ìœ¼ë¡œ ì´ ì…ê³ ëŸ‰ì„ ê³„ì‚°í•´ì„œ ë°˜í™˜
+		Deliver[] DeliverList;
+		int TotalAmount = 0;
+		return TotalAmount;
+	}
+	
+	private void saveDeliver(Deliver Input) { // ìƒì„±í•œ classë¥¼ fileë¡œ ì €ì¥
+		System.out.println("ì´ methodëŠ” ì¶œê³  ì •ë³´ë¥¼ fileì— ì €ì¥ì‹œí‚µë‹ˆë‹¤.");
 		System.out.println("Name: " + Input.getName());
 		System.out.println("Amount: " + Input.getAmount());
 		System.out.println("Date: " + Input.getDate());
