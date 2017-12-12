@@ -1,13 +1,11 @@
-package ProductManagement; // ÇÑ±Û·Î ¹°Ç°°ü¸®
+package ProductManagement; // í•œê¸€ë¡œ ë¬¼í’ˆê´€ë¦¬
 
-import java.io.IOException;
-
-public class Store { // ÇÑ±æ·Î ÀÔ°í
+public class Store { // í•œê¸¸ë¡œ ì…ê³ 
 	/*
-		ÇöÀç status
-	- inputStore method ÀÛ¼ºÁß.
-	- searchStore method ÀÛ¼º ÇÊ¿ä.
-	- saveStore method´Â File I/O class ¿Ï¼º Àü±îÁö ÀÛ¼º ´ë±â
+		í˜„ì¬ status
+	- inputStore method ì‘ì„±ì¤‘.
+	- searchStore method ì‘ì„± í•„ìš”.
+	- saveStore methodëŠ” File I/O class ì™„ì„± ì „ê¹Œì§€ ì‘ì„± ëŒ€ê¸°
 	*/
 	
 	private int storePrice;
@@ -53,8 +51,8 @@ public class Store { // ÇÑ±æ·Î ÀÔ°í
 	}
 	
 	public void setCode(String Code) {
-		// ¹ÙÄÚµå ¹øÈ£¸¦ ÀÔ·Â¹Ş¾Æ¼­ ¹°Ç°¹øÈ£·Î º¯È¯½ÃÅ²´Ù.
-		// ÀÌ¸¦ À§ÇØ¼­, ¹°Ç°¸ñ·ÏÀ» ÀĞ¾î¼­ °¡Àå ¸¶Áö¸· ¼ıÀÚ¸¦ ºÎ¿©ÇÑ´Ù.
+		// ë°”ì½”ë“œ ë²ˆí˜¸ë¥¼ ì…ë ¥ë°›ì•„ì„œ ë¬¼í’ˆë²ˆí˜¸ë¡œ ë³€í™˜ì‹œí‚¨ë‹¤.
+		// ì´ë¥¼ ìœ„í•´ì„œ, ë¬¼í’ˆëª©ë¡ì„ ì½ì–´ì„œ ê°€ì¥ ë§ˆì§€ë§‰ ìˆ«ìë¥¼ ë¶€ì—¬í•œë‹¤.
 		this.storeCode = new String(Code);
 	}
 	
@@ -87,24 +85,28 @@ public class Store { // ÇÑ±æ·Î ÀÔ°í
 	}
 	
 	public void inputStore(String ExpirationDate, String Container, int OriginalPrice, int Inadequate) {
-		// Eclipse ÄÜ¼Ö Ã¢¿¡¼­ ½Ç½ÃÇÏ¸é ÇÑ±Û ÀÔ·Â ½Ã ¹®Á¦°¡ ÀÖ½À´Ï´Ù. ÀÔ·ÂÇÒ ¶§ curser¸¦ ¼öµ¿À¸·Î Á¶Á¤ÇØ¾ßÁà¾ß ÇØ¿ä(...)
-		// UI µğÀÚÀÎÇÒ ¶§, ÀÔ·Â°ªÀ» ¹Ş¾Æ¼­ ¹İÈ¯¹Ş´Â ¹æ¹ıÀ» »ç¿ëÇÏ´Â°Ô ÁÁÀ» µí. Switch °°Àº°É ¾²¸é ±¸Çö°¡´É.
-		Product MadeProduct = new Product(ExpirationDate, Container, OriginalPrice, Inadequate); // »ı¼ºÀÚ¸¦ ÅëÇØ Á¦Ç° Á¤º¸ »ı¼º ÈÄ ÀúÀåµÈ´Ù.
-		MadeProduct.updateProductList(this, -1, -1); // Á¤º¸ ¾÷µ¥ÀÌÆ®
-		saveStore(this); // ¸Ç ¸¶Áö¸· ºÎºĞ¿¡ ½Ç½Ã
+		// Eclipse ì½˜ì†” ì°½ì—ì„œ ì‹¤ì‹œí•˜ë©´ í•œê¸€ ì…ë ¥ ì‹œ ë¬¸ì œê°€ ìˆìŠµë‹ˆë‹¤. ì…ë ¥í•  ë•Œ curserë¥¼ ìˆ˜ë™ìœ¼ë¡œ ì¡°ì •í•´ì•¼ì¤˜ì•¼ í•´ìš”(...)
+		// UI ë””ìì¸í•  ë•Œ, ì…ë ¥ê°’ì„ ë°›ì•„ì„œ ë°˜í™˜ë°›ëŠ” ë°©ë²•ì„ ì‚¬ìš©í•˜ëŠ”ê²Œ ì¢‹ì„ ë“¯. Switch ê°™ì€ê±¸ ì“°ë©´ êµ¬í˜„ê°€ëŠ¥.
+		Product MadeProduct = new Product(ExpirationDate, Container, OriginalPrice, Inadequate); // ìƒì„±ìë¥¼ í†µí•´ ì œí’ˆ ì •ë³´ ìƒì„± í›„ ì €ì¥ëœë‹¤.
+		MadeProduct.updateProductList(this, -1, -1); // ì •ë³´ ì—…ë°ì´íŠ¸
+		saveStore(this); // ë§¨ ë§ˆì§€ë§‰ ë¶€ë¶„ì— ì‹¤ì‹œ
 	}
 	
-	public void searchStore() {
-		
+	public Store searchStore() {
+		Store result = null;
+		return result;
 	}
 	
-	public int returnTotalStoreAmount() {
-		int TotalAmount = -1;
+	public int returnTotalStoreAmount(String BarCode) {
+		// fileë¡œë¶€í„° dataë¥¼ loadí•´ì„œ Arrayì— ì €ì¥.
+		// ê·¸ í›„ ì…ë ¥ë°›ì€ Barcodeë¥¼ ë°”íƒ•ìœ¼ë¡œ ì´ ì…ê³ ëŸ‰ì„ ê³„ì‚°í•´ì„œ ë°˜í™˜
+		Store[] StoreList;
+		int TotalAmount = 0;
 		return TotalAmount;
 	}
 	
-	private void saveStore(Store Input) { // »ı¼ºÇÑ class¸¦ file·Î ÀúÀå
-		System.out.println("ÀÌ method´Â ÀÔ°í Á¤º¸¸¦ file¿¡ ÀúÀå½ÃÅµ´Ï´Ù.");
+	private void saveStore(Store Input) { // ìƒì„±í•œ classë¥¼ fileë¡œ ì €ì¥
+		System.out.println("ì´ methodëŠ” ì…ê³  ì •ë³´ë¥¼ fileì— ì €ì¥ì‹œí‚µë‹ˆë‹¤.");
 		System.out.println("Name: " + Input.getName());
 		System.out.println("Amount: " + Input.getAmount());
 		System.out.println("Date: " + Input.getDate());
