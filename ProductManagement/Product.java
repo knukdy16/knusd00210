@@ -1,11 +1,11 @@
-package ProductManagement; // ÇÑ±Û·Î ¹°Ç°°ü¸®
+package ProductManagement; // í•œê¸€ë¡œ ë¬¼í’ˆê´€ë¦¬
 
-public class Product { // ÇÑ±Û·Î ¹°Ç°
+public class Product { // í•œê¸€ë¡œ ë¬¼í’ˆ
 	/*
-		ÇöÀç status
-	- get, set method ÀÛ¼º ¿Ï·á
-	- constructor ÀÛ¼º ¿Ï·á. Å×½ºÆ® ÇÊ¿ä
-	- ¹°Ç°¸ñ·ÏÀúÀå, ¹°Ç°¸ñ·Ï°»½Å method ÀÛ¼ºÁß.
+		í˜„ì¬ status
+	- get, set method ì‘ì„± ì™„ë£Œ
+	- constructor ì‘ì„± ì™„ë£Œ. í…ŒìŠ¤íŠ¸ í•„ìš”
+	- ë¬¼í’ˆëª©ë¡ì €ì¥, ë¬¼í’ˆëª©ë¡ê°±ì‹  method ì‘ì„±ì¤‘.
 	*/
 	private String Client;
 	private String Name;
@@ -16,7 +16,7 @@ public class Product { // ÇÑ±Û·Î ¹°Ç°
 	private int NormalPrice;
 	private int BuyingPrice;
 	private int OriginalPrice;
-	// Àç°í°¡ Á¦°Å ÇÊ¿ä
+	// ì¬ê³ ê°€ ì œê±° í•„ìš”
 	private int Amount;
 	private double DiscountRate;
 	private int Inadequate;
@@ -43,7 +43,7 @@ public class Product { // ÇÑ±Û·Î ¹°Ç°
 		this.BarCode = "1234567890123";
 		this.ProductCode = "12345678901231";
 		this.ExpirationDate = "0000-00-00";
-		this.Container = "´ë±¸±¤¿ª½Ã ºÏ±¸ »ê°İ3µ¿ ´ëÇĞ·Î30";
+		this.Container = "ëŒ€êµ¬ê´‘ì—­ì‹œ ë¶êµ¬ ì‚°ê²©3ë™ ëŒ€í•™ë¡œ30";
 		this.NormalPrice = 1100000;
 		this.BuyingPrice = 1100000;
 		this.OriginalPrice = 1000000;
@@ -51,6 +51,89 @@ public class Product { // ÇÑ±Û·Î ¹°Ç°
 		this.DiscountRate = 0;
 	}
 	*/
+	public Product(int i) {
+		switch(i) {
+		case 0:
+			this.Client = "Samsung Electronics";
+			this.Name = "Samsung Galaxy Note 8_SKT";
+			this.BarCode = "1234567890123";
+			this.ProductCode = "12345678901231";
+			this.ExpirationDate = "0000-00-00";
+			this.Container = "ëŒ€êµ¬ê´‘ì—­ì‹œ ë¶êµ¬ ì‚°ê²©3ë™ ëŒ€í•™ë¡œ30";
+			this.NormalPrice = 1100000;
+			this.BuyingPrice = 1100000;
+			this.OriginalPrice = 1000000;
+			this.Amount = 10;
+			this.DiscountRate = 0;
+			break;
+		case 1:
+			this.Client = "Samsung Electronics";
+			this.Name = "Samsung Galaxy Note 8_KT";
+			this.BarCode = "1234567890124";
+			this.ProductCode = "12345678901241";
+			this.ExpirationDate = "0000-00-00";
+			this.Container = "ëŒ€êµ¬ê´‘ì—­ì‹œ ë¶êµ¬ ì‚°ê²©3ë™ ëŒ€í•™ë¡œ30";
+			this.NormalPrice = 1100000;
+			this.BuyingPrice = 1100000;
+			this.OriginalPrice = 1000000;
+			this.Amount = 10;
+			this.DiscountRate = 0;
+			break;
+		case 2:
+			this.Client = "Samsung Electronics";
+			this.Name = "Samsung Galaxy Note 8_UPLUS";
+			this.BarCode = "1234567890125";
+			this.ProductCode = "12345678901251";
+			this.ExpirationDate = "0000-00-00";
+			this.Container = "ëŒ€êµ¬ê´‘ì—­ì‹œ ë¶êµ¬ ì‚°ê²©3ë™ ëŒ€í•™ë¡œ30";
+			this.NormalPrice = 1100000;
+			this.BuyingPrice = 1100000;
+			this.OriginalPrice = 1000000;
+			this.Amount = 10;
+			this.DiscountRate = 0;
+			break;
+		case 3:
+			this.Client = "Samsung Electronics";
+			this.Name = "Samsung Galaxy Note 8_KT";
+			this.BarCode = "1234567890124";
+			this.ProductCode = "12345678901242";
+			this.ExpirationDate = "0000-00-00";
+			this.Container = "ëŒ€êµ¬ê´‘ì—­ì‹œ ë¶êµ¬ ì‚°ê²©3ë™ ëŒ€í•™ë¡œ30";
+			this.NormalPrice = 1100000;
+			this.BuyingPrice = 1100000;
+			this.OriginalPrice = 1000000;
+			this.Amount = 10;
+			this.DiscountRate = 0;
+			break;
+		case 4:
+			this.Client = "Samsung Electronics";
+			this.Name = "Samsung Galaxy Note 8_SKT";
+			this.BarCode = "1234567890123";
+			this.ProductCode = "12345678901232";
+			this.ExpirationDate = "0000-00-00";
+			this.Container = "ëŒ€êµ¬ê´‘ì—­ì‹œ ë¶êµ¬ ì‚°ê²©3ë™ ëŒ€í•™ë¡œ30";
+			this.NormalPrice = 1100000;
+			this.BuyingPrice = 1100000;
+			this.OriginalPrice = 1000000;
+			this.Amount = 10;
+			this.DiscountRate = 0;
+			break;
+		case 5:
+			this.Client = "Samsung Electronics";
+			this.Name = "Samsung Galaxy Note 8_SKT";
+			this.BarCode = "1234567890123";
+			this.ProductCode = "12345678901233";
+			this.ExpirationDate = "0000-00-00";
+			this.Container = "ëŒ€êµ¬ê´‘ì—­ì‹œ ë¶êµ¬ ì‚°ê²©3ë™ ëŒ€í•™ë¡œ30";
+			this.NormalPrice = 1100000;
+			this.BuyingPrice = 1100000;
+			this.OriginalPrice = 1000000;
+			this.Amount = 10;
+			this.DiscountRate = 0;
+			break;
+		}
+	}
+	
 	
 	public Product(Product Search) {
 		this.Client = new String(Search.getClient());
@@ -186,14 +269,14 @@ public class Product { // ÇÑ±Û·Î ¹°Ç°
 	                  && (year == otherDate.year) );
 	    }
     } 
-	 */
+	*/
 	
-	public void updateProductList(Object StoreData, int amount, double rate) { // ¹°Ç°¸ñ·Ï°»½Å(). ÀÛ¼ºÁß...
+	public void updateProductList(Object StoreData, int amount, double rate) { // ë¬¼í’ˆëª©ë¡ê°±ì‹ (). ì‘ì„±ì¤‘...
 		// update product data from Deliver or rate.
 		Store tempStore = new Store();
-		if(StoreData != null) { // »õ·Î »ı¼ºÇÑ ¹°Ç° class¿¡ ÀÔ°í µ¥ÀÌÅÍ¸¦ ÀúÀåÇÒ °æ¿ì
+		if(StoreData != null) { // ìƒˆë¡œ ìƒì„±í•œ ë¬¼í’ˆ classì— ì…ê³  ë°ì´í„°ë¥¼ ì €ì¥í•  ê²½ìš°
 			if(tempStore.getClass() != StoreData.getClass()) {
-				System.err.println("Error: ObjectÀÇ Parameter°¡ Store class type Object°¡ ¾Æ´Õ´Ï´Ù.");
+				System.err.println("Error: Objectì˜ Parameterê°€ Store class type Objectê°€ ì•„ë‹™ë‹ˆë‹¤.");
 			} else {
 				tempStore = (Store)StoreData;
 				this.Client = tempStore.getClient();
@@ -205,26 +288,27 @@ public class Product { // ÇÑ±Û·Î ¹°Ç°
 				setBuyingPrice();
 				this.Amount = tempStore.getAmount();
 			}
-		} else if(rate >= 0) { // ÇÒÀÎÀ² °»½ÅÇÒ °æ¿ì
-			System.out.println("ÇÒÀÎÀ² °»½Å Å×½ºÆ®");
+		} else if(rate >= 0) { // í• ì¸ìœ¨ ê°±ì‹ í•  ê²½ìš°
+			System.out.println("í• ì¸ìœ¨ ê°±ì‹  í…ŒìŠ¤íŠ¸");
 			this.setDiscountRate(rate);
 			this.setBuyingPrice();
-		} else if(amount > 0) { // Ãâ°í ÈÄ ¹°Ç° Á¤º¸¸¦ °»½ÅÇÒ °æ¿ì
-			System.out.println("Ãâ°í·® Àû¿ë Å×½ºÆ®");
-			System.out.println("Àû¿ë Àü Àç°í·®: " + this.getAmount());
-			System.out.println("Àû¿ëÇÒ Ãâ°í·®: " + amount);
+		} else if(amount > 0) { // ì¶œê³  í›„ ë¬¼í’ˆ ì •ë³´ë¥¼ ê°±ì‹ í•  ê²½ìš°
+			System.out.println("ì¶œê³ ëŸ‰ ì ìš© í…ŒìŠ¤íŠ¸");
+			System.out.println("ì ìš© ì „ ì¬ê³ ëŸ‰: " + this.getAmount());
+			System.out.println("ì ìš©í•  ì¶œê³ ëŸ‰: " + amount);
 			this.setAmount(this.getAmount() - amount);
-			System.out.println("Àû¿ë ÈÄ Àç°í·®: " + this.getAmount());
-		} else { // ÀÔ·Â°ª Æ²¸®°Ô ¾²¸é
-			System.err.println("Error: Product Class methodÀÇ Parameter°¡ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù.");
+			System.out.println("ì ìš© í›„ ì¬ê³ ëŸ‰: " + this.getAmount());
+		} else { // ì…ë ¥ê°’ í‹€ë¦¬ê²Œ ì“°ë©´
+			System.err.println("Error: Product Class methodì˜ Parameterê°€ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return;
 		}
 		
 		saveProductList(this); // save class contents to file.
 	}
 	
-	private void saveProductList(Product SaveData) { // ¹°Ç°¸ñ·ÏÀúÀå(). ÀÛ¼º ÇÊ¿ä!
-		System.out.println("¡ÙÀúÀå Å×½ºÆ® ¹®±¸¡Ú");
+	private void saveProductList(Product SaveData) { // ë¬¼í’ˆëª©ë¡ì €ì¥(). ì‘ì„± í•„ìš”!
+		// Product Objectë¥¼ ë°›ì•„ì™€ì„œ FileI/O ê´€ë ¨ Classë¥¼ Objectë¡œ ìƒì„±í•´ì„œ Fileì— ì €ì¥
+		System.out.println("â˜†ì €ì¥ í…ŒìŠ¤íŠ¸ ë¬¸êµ¬â˜…");
 		System.out.println("Name: " + this.getName());
 		System.out.println("Amount: " + this.getAmount());
 		System.out.println("OriginalPrice: " + this.getOriginalPrice());
@@ -236,6 +320,6 @@ public class Product { // ÇÑ±Û·Î ¹°Ç°
 		System.out.println("ExpirationDate: " + this.getExpirationDate());
 		System.out.println("Container: " + this.getContainer());
 		System.out.println("OriginalPrice: " + this.getOriginalPrice());
-		System.out.println("ÀÌ method´Â ¹°Ç° Á¤º¸¸¦ file·Î ÀúÀåÇÏ´Â ¿ªÇÒÀÔ´Ï´Ù.");
+		System.out.println("ì´ methodëŠ” ë¬¼í’ˆ ì •ë³´ë¥¼ fileë¡œ ì €ì¥í•˜ëŠ” ì—­í• ì…ë‹ˆë‹¤.");
 	}
 }
