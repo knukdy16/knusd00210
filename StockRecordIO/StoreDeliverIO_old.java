@@ -26,24 +26,24 @@ public class StoreDeliverIO {
 		String Container = null;
 		int OriginalPrice = 0;
 		int Inadequate = 0;
-		boolean InputCheck = true; // ÀÔ·Â°ª À¯È¿¼º ¿©ºÎ ¹× ÃÖÁ¾ È®ÀÎ¿ë
+		boolean InputCheck = true; // ì…ë ¥ê°’ ìœ íš¨ì„± ì—¬ë¶€ ë° ìµœì¢… í™•ì¸ìš©
 		
-		System.out.println("»óÇ° ÀÌ¸§À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ìƒí’ˆ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		InputStore.setName(Input.nextLine());
-		System.out.println("°Å·¡Ã³¸íÀ» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ê±°ë˜ì²˜ëª…ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		InputStore.setClient(Input.nextLine());
-		System.out.println("Ã¢°íÀÌ¸§ ¶Ç´Â À§Ä¡¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ì°½ê³ ì´ë¦„ ë˜ëŠ” ìœ„ì¹˜ë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		Container = new String(Input.nextLine());
 		
-		System.out.println("ÀÔ°íÀÏÀÚ¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À(yyyy-MM-dd)");
+		System.out.println("ì…ê³ ì¼ìë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤(yyyy-MM-dd)");
 		StrTemp = Input.nextLine();
 		while(checkDate(StrTemp) != true) {
-			System.out.println("Invaild Format. yyyy-MM-dd¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			System.out.println("Invaild Format. yyyy-MM-ddì— ë§ì¶°ì„œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 			StrTemp = Input.nextLine();
 		}
 		InputStore.setDate(StrTemp);
 		
-		System.out.println("¹ÙÄÚµå¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ë°”ì½”ë“œë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		StrTemp = Input.nextLine();
 		try {
 			Double.parseDouble(StrTemp);
@@ -52,7 +52,7 @@ public class StoreDeliverIO {
 			InputCheck = false;
 		}
 		while(StrTemp.length() != 13 || !(InputCheck)) {
-			System.out.println("Invaild Format. ¹ÙÄÚµå ¹øÈ£ ±æÀÌ¿¡ ¸ÂÃç¼­ ¼ıÀÚ·Î ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			System.out.println("Invaild Format. ë°”ì½”ë“œ ë²ˆí˜¸ ê¸¸ì´ì— ë§ì¶°ì„œ ìˆ«ìë¡œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 			StrTemp = Input.nextLine();
 			try {
 				Long.parseLong(StrTemp);
@@ -63,17 +63,17 @@ public class StoreDeliverIO {
 		}
 		InputStore.setCode(StrTemp);
 		
-		System.out.println("À¯Åë±âÇÑÀ» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À(yyyy-MM-dd) (¾ø´Â Á¦Ç°ÀÌ¸é '0000-00-00'À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À)");
+		System.out.println("ìœ í†µê¸°í•œì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤(yyyy-MM-dd) (ì—†ëŠ” ì œí’ˆì´ë©´ '0000-00-00'ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤)");
 		StrTemp = Input.nextLine();
 		while(checkDate(StrTemp) != true) {
 			if(StrTemp.equals("0000-00-00"))
 				break;
-			System.out.println("Invaild Format. yyyy-MM-dd¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			System.out.println("Invaild Format. yyyy-MM-ddì— ë§ì¶°ì„œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 			StrTemp = Input.nextLine();
 		}
 		ExpirationDate = new String(StrTemp);
 		
-		System.out.println("ÆÇ¸Å°¡°İÀ» ¿ø ´ÜÀ§(\\)·Î ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("íŒë§¤ê°€ê²©ì„ ì› ë‹¨ìœ„(\\)ë¡œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		try {
 			IntTemp = Input.nextInt();
 			InputCheck = true;
@@ -81,7 +81,7 @@ public class StoreDeliverIO {
 			InputCheck = false;
 		}
 		while(!(InputCheck) || IntTemp <= 0) {
-			System.out.println("Invalid value. °¡°İÀ» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			System.out.println("Invalid value. ê°€ê²©ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 			Input.nextLine();
 			try {
 				IntTemp = Input.nextInt();
@@ -92,7 +92,7 @@ public class StoreDeliverIO {
 		}
 		InputStore.setPrice(IntTemp);
 		
-		System.out.println("ÀÔ°í ¼ö·®À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ì…ê³  ìˆ˜ëŸ‰ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		try {
 			IntTemp = Input.nextInt();
 			InputCheck = true;
@@ -100,7 +100,7 @@ public class StoreDeliverIO {
 			InputCheck = false;
 		}
 		while(!(InputCheck) || IntTemp <= 0) {
-			System.out.println("Invalid value. Ãâ°í¼ö·®À» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			System.out.println("Invalid value. ì¶œê³ ìˆ˜ëŸ‰ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 			Input.nextLine();
 			try {
 				IntTemp = Input.nextInt();
@@ -111,7 +111,7 @@ public class StoreDeliverIO {
 		}
 		InputStore.setAmount(IntTemp);
 		
-		System.out.println("¿ø°¡¸¦ ¿ø ´ÜÀ§(\\)·Î ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ì›ê°€ë¥¼ ì› ë‹¨ìœ„(\\)ë¡œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		try {
 			IntTemp = Input.nextInt();
 			InputCheck = true;
@@ -119,7 +119,7 @@ public class StoreDeliverIO {
 			InputCheck = false;
 		}
 		while(!(InputCheck) || IntTemp <= 0) {
-			System.out.println("Invalid value. ¿ø°¡¸¦ ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			System.out.println("Invalid value. ì›ê°€ë¥¼ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 			Input.nextLine();
 			try {
 				IntTemp = Input.nextInt();
@@ -130,7 +130,7 @@ public class StoreDeliverIO {
 		}
 		OriginalPrice = IntTemp;
 		
-		System.out.println("ºÎÁ·¾Ë¸² ±âÁØ·®À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ë¶€ì¡±ì•Œë¦¼ ê¸°ì¤€ëŸ‰ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		try {
 			IntTemp = Input.nextInt();
 			InputCheck = true;
@@ -138,7 +138,7 @@ public class StoreDeliverIO {
 			InputCheck = false;
 		}
 		while(!(InputCheck) || IntTemp < 0) {
-			System.out.println("Invalid value. ±âÁØ·®À» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			System.out.println("Invalid value. ê¸°ì¤€ëŸ‰ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 			Input.nextLine();
 			try {
 				IntTemp = Input.nextInt();
@@ -152,25 +152,25 @@ public class StoreDeliverIO {
 		
 		InputCheck = checkStoreInput(InputStore, ExpirationDate, Container, OriginalPrice, Inadequate);
 		if(!(InputCheck)) {
-			// ´Ù½Ã ÀÔ·Â¹Ş¾Æ¼­ È®ÀÎ
+			// ë‹¤ì‹œ ì…ë ¥ë°›ì•„ì„œ í™•ì¸
 			while(!(InputCheck)) {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-				System.out.println("»óÇ° ÀÌ¸§À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputStore.getName() + "]");
+				System.out.println("ìƒí’ˆ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputStore.getName() + "]");
 				InputStore.setName(Input.nextLine());
-				System.out.println("°Å·¡Ã³¸íÀ» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputStore.getClient() + "]");
+				System.out.println("ê±°ë˜ì²˜ëª…ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputStore.getClient() + "]");
 				InputStore.setClient(Input.nextLine());
-				System.out.println("Ã¢°íÀÌ¸§ ¶Ç´Â À§Ä¡¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + Container + "]");
+				System.out.println("ì°½ê³ ì´ë¦„ ë˜ëŠ” ìœ„ì¹˜ë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + Container + "]");
 				Container = new String(Input.nextLine());
 				
-				System.out.println("ÀÔ°íÀÏÀÚ¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À(yyyy-MM-dd)[" + InputStore.getDate() + "]");
+				System.out.println("ì…ê³ ì¼ìë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤(yyyy-MM-dd)[" + InputStore.getDate() + "]");
 				StrTemp = Input.nextLine();
 				while(checkDate(StrTemp) != true) {
-					System.out.println("Invaild Format. yyyy-MM-dd¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+					System.out.println("Invaild Format. yyyy-MM-ddì— ë§ì¶°ì„œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 					StrTemp = Input.nextLine();
 				}
 				InputStore.setDate(StrTemp);
 				
-				System.out.println("¹ÙÄÚµå¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputStore.getCode() + "]");
+				System.out.println("ë°”ì½”ë“œë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputStore.getCode() + "]");
 				StrTemp = Input.nextLine();
 				try {
 					Double.parseDouble(StrTemp);
@@ -179,7 +179,7 @@ public class StoreDeliverIO {
 					InputCheck = false;
 				}
 				while(StrTemp.length() != 13 || !(InputCheck)) {
-					System.out.println("Invaild Format. ¹ÙÄÚµå ¹øÈ£ ±æÀÌ¿¡ ¸ÂÃç¼­ ¼ıÀÚ·Î ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+					System.out.println("Invaild Format. ë°”ì½”ë“œ ë²ˆí˜¸ ê¸¸ì´ì— ë§ì¶°ì„œ ìˆ«ìë¡œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 					StrTemp = Input.nextLine();
 					try {
 						Long.parseLong(StrTemp);
@@ -190,17 +190,17 @@ public class StoreDeliverIO {
 				}
 				InputStore.setCode(StrTemp);
 				
-				System.out.println("À¯Åë±âÇÑÀ» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À(yyyy-MM-dd)[" + ExpirationDate + "]");
+				System.out.println("ìœ í†µê¸°í•œì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤(yyyy-MM-dd)[" + ExpirationDate + "]");
 				StrTemp = Input.nextLine();
 				while(checkDate(StrTemp) != true) {
 					if(StrTemp.equals("0000-00-00"))
 						break;
-					System.out.println("Invaild Format. yyyy-MM-dd¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+					System.out.println("Invaild Format. yyyy-MM-ddì— ë§ì¶°ì„œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 					StrTemp = Input.nextLine();
 				}
 				ExpirationDate = new String(StrTemp);
 				
-				System.out.println("ÆÇ¸Å°¡°İÀ» ¿ø ´ÜÀ§(\\)·Î ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputStore.getPrice() + "]");
+				System.out.println("íŒë§¤ê°€ê²©ì„ ì› ë‹¨ìœ„(\\)ë¡œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputStore.getPrice() + "]");
 				try {
 					IntTemp = Input.nextInt();
 					InputCheck = true;
@@ -208,7 +208,7 @@ public class StoreDeliverIO {
 					InputCheck = false;
 				}
 				while(!(InputCheck) || IntTemp <= 0) {
-					System.out.println("Invalid value. °¡°İÀ» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+					System.out.println("Invalid value. ê°€ê²©ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 					Input.nextLine();
 					try {
 						IntTemp = Input.nextInt();
@@ -219,7 +219,7 @@ public class StoreDeliverIO {
 				}
 				InputStore.setPrice(IntTemp);
 				
-				System.out.println("ÀÔ°í ¼ö·®À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputStore.getAmount() + "]");
+				System.out.println("ì…ê³  ìˆ˜ëŸ‰ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputStore.getAmount() + "]");
 				try {
 					IntTemp = Input.nextInt();
 					InputCheck = true;
@@ -227,7 +227,7 @@ public class StoreDeliverIO {
 					InputCheck = false;
 				}
 				while(!(InputCheck) || IntTemp <= 0) {
-					System.out.println("Invalid value. Ãâ°í¼ö·®À» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+					System.out.println("Invalid value. ì¶œê³ ìˆ˜ëŸ‰ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 					Input.nextLine();
 					try {
 						IntTemp = Input.nextInt();
@@ -238,7 +238,7 @@ public class StoreDeliverIO {
 				}
 				InputStore.setAmount(IntTemp);
 				
-				System.out.println("¿ø°¡¸¦ ¿ø ´ÜÀ§(\\)·Î ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + OriginalPrice + "]");
+				System.out.println("ì›ê°€ë¥¼ ì› ë‹¨ìœ„(\\)ë¡œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + OriginalPrice + "]");
 				try {
 					IntTemp = Input.nextInt();
 					InputCheck = true;
@@ -246,7 +246,7 @@ public class StoreDeliverIO {
 					InputCheck = false;
 				}
 				while(!(InputCheck) || IntTemp <= 0) {
-					System.out.println("Invalid value. ¿ø°¡¸¦ ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+					System.out.println("Invalid value. ì›ê°€ë¥¼ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 					Input.nextLine();
 					try {
 						IntTemp = Input.nextInt();
@@ -257,7 +257,7 @@ public class StoreDeliverIO {
 				}
 				OriginalPrice = IntTemp;
 				
-				System.out.println("ºÎÁ·¾Ë¸² ±âÁØ·®À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + Inadequate + "]");
+				System.out.println("ë¶€ì¡±ì•Œë¦¼ ê¸°ì¤€ëŸ‰ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + Inadequate + "]");
 				try {
 					IntTemp = Input.nextInt();
 					InputCheck = true;
@@ -265,7 +265,7 @@ public class StoreDeliverIO {
 					InputCheck = false;
 				}
 				while(!(InputCheck) || IntTemp < 0) {
-					System.out.println("Invalid value. ±âÁØ·®À» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+					System.out.println("Invalid value. ê¸°ì¤€ëŸ‰ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 					Input.nextLine();
 					try {
 						IntTemp = Input.nextInt();
@@ -280,7 +280,7 @@ public class StoreDeliverIO {
 				InputCheck = checkStoreInput(InputStore, ExpirationDate, Container, OriginalPrice, Inadequate);
 			}
 		}
-		// ¿©±â¿¡¼­ºÎÅÍ ÀÔ·Â°ª ÀúÀå ½Ç½Ã
+		// ì—¬ê¸°ì—ì„œë¶€í„° ì…ë ¥ê°’ ì €ì¥ ì‹¤ì‹œ
 		InputStore.inputStore(ExpirationDate, Container, OriginalPrice, Inadequate);
 	}
 
@@ -290,22 +290,22 @@ public class StoreDeliverIO {
 		Scanner Input = new Scanner(System.in);
 		String StrTemp = null;
 		int IntTemp = 0;
-		boolean InputCheck = true; // ÀÔ·Â°ª À¯È¿¼º ¿©ºÎ ¹× ÃÖÁ¾ È®ÀÎ¿ë
+		boolean InputCheck = true; // ì…ë ¥ê°’ ìœ íš¨ì„± ì—¬ë¶€ ë° ìµœì¢… í™•ì¸ìš©
 		
-		System.out.println("»óÇ° ÀÌ¸§À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ìƒí’ˆ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		InputDeliver.setName(Input.nextLine());
-		System.out.println("°Å·¡Ã³¸íÀ» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ê±°ë˜ì²˜ëª…ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		InputDeliver.setClient(Input.nextLine());
 		
-		System.out.println("Ãâ°íÀÏÀÚ¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À(yyyy-MM-dd)");
+		System.out.println("ì¶œê³ ì¼ìë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤(yyyy-MM-dd)");
 		StrTemp = Input.nextLine();
 		while(checkDate(StrTemp) != true) {
-			System.out.println("Invaild Format. yyyy-MM-dd¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			System.out.println("Invaild Format. yyyy-MM-ddì— ë§ì¶°ì„œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 			StrTemp = Input.nextLine();
 		}
 		InputDeliver.setDate(StrTemp);
 		
-		System.out.println("¹°Ç° ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ë¬¼í’ˆ ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		StrTemp = Input.nextLine();
 		try {
 			Double.parseDouble(StrTemp);
@@ -314,7 +314,7 @@ public class StoreDeliverIO {
 			InputCheck = false;
 		}
 		while(StrTemp.length() <= 13 || !(InputCheck)) {
-			System.out.println("Invaild Format. ¹°Ç° ¹øÈ£¸¦ ±æÀÌ¿¡ ¸ÂÃç¼­ ¼ıÀÚ·Î ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			System.out.println("Invaild Format. ë¬¼í’ˆ ë²ˆí˜¸ë¥¼ ê¸¸ì´ì— ë§ì¶°ì„œ ìˆ«ìë¡œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 			StrTemp = Input.nextLine();
 			try {
 				Long.parseLong(StrTemp);
@@ -325,7 +325,7 @@ public class StoreDeliverIO {
 		}
 		InputDeliver.setCode(StrTemp);
 		
-		System.out.println("Ãâ°í°¡¸¦ ¿ø ´ÜÀ§(\\)·Î ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ì¶œê³ ê°€ë¥¼ ì› ë‹¨ìœ„(\\)ë¡œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		try {
 			IntTemp = Input.nextInt();
 			InputCheck = true;
@@ -333,7 +333,7 @@ public class StoreDeliverIO {
 			InputCheck = false;
 		}
 		while(!(InputCheck) || IntTemp <= 0) {
-			System.out.println("Invalid value. °¡°İÀ» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			System.out.println("Invalid value. ê°€ê²©ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 			Input.nextLine();
 			try {
 				IntTemp = Input.nextInt();
@@ -344,7 +344,7 @@ public class StoreDeliverIO {
 		}
 		InputDeliver.setPrice(IntTemp);
 		
-		System.out.println("Ãâ°í ¼ö·®À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		System.out.println("ì¶œê³  ìˆ˜ëŸ‰ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤");
 		try {
 			IntTemp = Input.nextInt();
 			InputCheck = true;
@@ -352,7 +352,7 @@ public class StoreDeliverIO {
 			InputCheck = false;
 		}
 		while(!(InputCheck) || IntTemp <= 0) {
-			System.out.println("Invalid value. Ãâ°í¼ö·®À» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			System.out.println("Invalid value. ì¶œê³ ìˆ˜ëŸ‰ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 			Input.nextLine();
 			try {
 				IntTemp = Input.nextInt();
@@ -366,23 +366,23 @@ public class StoreDeliverIO {
 
 		InputCheck = checkDeliverInput(InputDeliver);
 		if(!(InputCheck)) {
-			// ´Ù½Ã ÀÔ·Â¹Ş¾Æ¼­ È®ÀÎ
+			// ë‹¤ì‹œ ì…ë ¥ë°›ì•„ì„œ í™•ì¸
 			while(!(InputCheck)) {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-				System.out.println("»óÇ° ÀÌ¸§À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputDeliver.getName() + "]");
+				System.out.println("ìƒí’ˆ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputDeliver.getName() + "]");
 				InputDeliver.setName(Input.nextLine());
-				System.out.println("°Å·¡Ã³¸íÀ» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputDeliver.getClient() + "]");
+				System.out.println("ê±°ë˜ì²˜ëª…ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputDeliver.getClient() + "]");
 				InputDeliver.setClient(Input.nextLine());
 				
-				System.out.println("Ãâ°íÀÏÀÚ¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À(yyyy-MM-dd)[" + InputDeliver.getDate() + "]");
+				System.out.println("ì¶œê³ ì¼ìë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤(yyyy-MM-dd)[" + InputDeliver.getDate() + "]");
 				StrTemp = Input.nextLine();
 				while(checkDate(StrTemp) != true) {
-					System.out.println("Invaild Format. yyyy-MM-dd¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+					System.out.println("Invaild Format. yyyy-MM-ddì— ë§ì¶°ì„œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 					StrTemp = Input.nextLine();
 				}
 				InputDeliver.setDate(StrTemp);
 				
-				System.out.println("¹°Ç° ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputDeliver.getCode() + "]");
+				System.out.println("ë¬¼í’ˆ ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputDeliver.getCode() + "]");
 				StrTemp = Input.nextLine();
 				try {
 					Double.parseDouble(StrTemp);
@@ -391,7 +391,7 @@ public class StoreDeliverIO {
 					InputCheck = false;
 				}
 				while(StrTemp.length() <= 13 || !(InputCheck)) {
-					System.out.println("Invaild Format. ¹°Ç° ¹øÈ£¸¦ ±æÀÌ¿¡ ¸ÂÃç¼­ ¼ıÀÚ·Î ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+					System.out.println("Invaild Format. ë¬¼í’ˆ ë²ˆí˜¸ë¥¼ ê¸¸ì´ì— ë§ì¶°ì„œ ìˆ«ìë¡œ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.");
 					StrTemp = Input.nextLine();
 					try {
 						Long.parseLong(StrTemp);
@@ -402,7 +402,7 @@ public class StoreDeliverIO {
 				}
 				InputDeliver.setCode(StrTemp);
 				
-				System.out.println("Ãâ°í°¡°İÀ» ¿ø ´ÜÀ§(\\)·Î ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputDeliver.getPrice() + "]");
+				System.out.println("ì¶œê³ ê°€ê²©ì„ ì› ë‹¨ìœ„(\\)ë¡œ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputDeliver.getPrice() + "]");
 				try {
 					IntTemp = Input.nextInt();
 					InputCheck = true;
@@ -410,7 +410,7 @@ public class StoreDeliverIO {
 					InputCheck = false;
 				}
 				while(!(InputCheck) || IntTemp <= 0) {
-					System.out.println("Invalid value. °¡°İÀ» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+					System.out.println("Invalid value. ê°€ê²©ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 					Input.nextLine();
 					try {
 						IntTemp = Input.nextInt();
@@ -421,7 +421,7 @@ public class StoreDeliverIO {
 				}
 				InputDeliver.setPrice(IntTemp);
 				
-				System.out.println("Ãâ°í ¼ö·®À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À[" + InputDeliver.getAmount() + "]");
+				System.out.println("ì¶œê³  ìˆ˜ëŸ‰ì„ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤[" + InputDeliver.getAmount() + "]");
 				try {
 					IntTemp = Input.nextInt();
 					InputCheck = true;
@@ -429,7 +429,7 @@ public class StoreDeliverIO {
 					InputCheck = false;
 				}
 				while(!(InputCheck) || IntTemp <= 0) {
-					System.out.println("Invalid value. Ãâ°í¼ö·®À» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+					System.out.println("Invalid value. ì¶œê³ ìˆ˜ëŸ‰ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
 					Input.nextLine();
 					try {
 						IntTemp = Input.nextInt();
@@ -444,8 +444,8 @@ public class StoreDeliverIO {
 				InputCheck = checkDeliverInput(InputDeliver);
 			}
 		}
-		// ¹°Ç°¹øÈ£ È®ÀÎÇØ¼­ ¹°Ç° ¾øÀ¸¸é ¹İ¿µ¾ÈÇÏ°í Á¾·á
-		// ¾Æ´Ï¸é ¹İ¿µ
+		// ë¬¼í’ˆë²ˆí˜¸ í™•ì¸í•´ì„œ ë¬¼í’ˆ ì—†ìœ¼ë©´ ë°˜ì˜ì•ˆí•˜ê³  ì¢…ë£Œ
+		// ì•„ë‹ˆë©´ ë°˜ì˜
 	}
 	
 	private boolean checkDate(String CheckDate) {
@@ -469,39 +469,39 @@ public class StoreDeliverIO {
 		char yn, temp;
 		boolean returnValue = true;
 		new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-		System.out.println("ÀÔ·ÂÇÏ½Å ÀÔ°í ±â·ÏÀÔ´Ï´Ù.");
-		System.out.println("Á¦Ç°ÀÌ¸ª: " + InputStore.getName());
-		System.out.println("ÀÔ°í·®: " + InputStore.getAmount());
-		System.out.println("ÀÔ°íÀÏÀÚ: " + InputStore.getDate());
-		System.out.println("ÀÔ°í°¡: " + InputStore.getPrice());
-		System.out.println("¹ÙÄÚµå¹øÈ£: " + InputStore.getCode());
-		System.out.println("°Å·¡Ã³: " + InputStore.getClient());
-		System.out.println("À¯Åë±âÇÑ: " + ExpirationDate);
-		System.out.println("Ã¢°íÀ§Ä¡: " + Container);
-		System.out.println("¿ø°¡: " + OriginalPrice);
-		System.out.println("ºÎÁ·¾Ë¸² ±âÁØ·®: " + Inadequate);
-		System.out.print("À§ÀÇ ÀÔ·ÂÀÌ ¸Â½À´Ï±î(y/n)? ");
+		System.out.println("ì…ë ¥í•˜ì‹  ì…ê³  ê¸°ë¡ì…ë‹ˆë‹¤.");
+		System.out.println("ì œí’ˆì´ë¦‰: " + InputStore.getName());
+		System.out.println("ì…ê³ ëŸ‰: " + InputStore.getAmount());
+		System.out.println("ì…ê³ ì¼ì: " + InputStore.getDate());
+		System.out.println("ì…ê³ ê°€: " + InputStore.getPrice());
+		System.out.println("ë°”ì½”ë“œë²ˆí˜¸: " + InputStore.getCode());
+		System.out.println("ê±°ë˜ì²˜: " + InputStore.getClient());
+		System.out.println("ìœ í†µê¸°í•œ: " + ExpirationDate);
+		System.out.println("ì°½ê³ ìœ„ì¹˜: " + Container);
+		System.out.println("ì›ê°€: " + OriginalPrice);
+		System.out.println("ë¶€ì¡±ì•Œë¦¼ ê¸°ì¤€ëŸ‰: " + Inadequate);
+		System.out.print("ìœ„ì˜ ì…ë ¥ì´ ë§ìŠµë‹ˆê¹Œ(y/n)? ");
 		yn = (char) System.in.read();
 		do {
 			temp = (char) System.in.read();
 		}while(temp != '\n');
 		
 		if(!(yn == 'y' || yn == 'n' || yn == 'Y' || yn == 'N')) {
-			while (!(yn == 'y' || yn == 'n' || yn == 'Y' || yn == 'N')) { // y³ª nÀÌ ¾Æ´Ï¸é »õ·Î È®ÀÎ
+			while (!(yn == 'y' || yn == 'n' || yn == 'Y' || yn == 'N')) { // yë‚˜ nì´ ì•„ë‹ˆë©´ ìƒˆë¡œ í™•ì¸
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 				System.out.println("temp : " + temp + ", yn : " + yn);
-				System.out.println("ÀÔ·ÂÇÏ½Å ÀÔ°í ±â·ÏÀÔ´Ï´Ù.");
-				System.out.println("Á¦Ç°ÀÌ¸ª: " + InputStore.getName());
-				System.out.println("ÀÔ°í·®: " + InputStore.getAmount());
-				System.out.println("ÀÔ°íÀÏÀÚ: " + InputStore.getDate());
-				System.out.println("ÀÔ°í°¡: " + InputStore.getPrice());
-				System.out.println("¹ÙÄÚµå¹øÈ£: " + InputStore.getCode());
-				System.out.println("°Å·¡Ã³: " + InputStore.getClient());
-				System.out.println("À¯Åë±âÇÑ: " + ExpirationDate);
-				System.out.println("Ã¢°íÀ§Ä¡: " + Container);
-				System.out.println("¿ø°¡: " + OriginalPrice);
-				System.out.println("ºÎÁ·¾Ë¸² ±âÁØ·®: " + Inadequate);
-				System.out.print("À§ÀÇ ÀÔ·ÂÀÌ ¸Â½À´Ï±î(y/n)? ");
+				System.out.println("ì…ë ¥í•˜ì‹  ì…ê³  ê¸°ë¡ì…ë‹ˆë‹¤.");
+				System.out.println("ì œí’ˆì´ë¦‰: " + InputStore.getName());
+				System.out.println("ì…ê³ ëŸ‰: " + InputStore.getAmount());
+				System.out.println("ì…ê³ ì¼ì: " + InputStore.getDate());
+				System.out.println("ì…ê³ ê°€: " + InputStore.getPrice());
+				System.out.println("ë°”ì½”ë“œë²ˆí˜¸: " + InputStore.getCode());
+				System.out.println("ê±°ë˜ì²˜: " + InputStore.getClient());
+				System.out.println("ìœ í†µê¸°í•œ: " + ExpirationDate);
+				System.out.println("ì°½ê³ ìœ„ì¹˜: " + Container);
+				System.out.println("ì›ê°€: " + OriginalPrice);
+				System.out.println("ë¶€ì¡±ì•Œë¦¼ ê¸°ì¤€ëŸ‰: " + Inadequate);
+				System.out.print("ìœ„ì˜ ì…ë ¥ì´ ë§ìŠµë‹ˆê¹Œ(y/n)? ");
 				yn = (char)System.in.read();
 				do {
 					temp = (char) System.in.read();
@@ -515,7 +515,7 @@ public class StoreDeliverIO {
 		else if(yn == 'n' || yn == 'N')
 			returnValue = false;
 		else {
-			System.err.println("ÀÔ°í±â·Ï È®ÀÎ ¿¡·¯. ½Ã½ºÅÛÀ» Àç½ÃÀÛÇØÁÖ½Ê½Ã¿À.");
+			System.err.println("ì…ê³ ê¸°ë¡ í™•ì¸ ì—ëŸ¬. ì‹œìŠ¤í…œì„ ì¬ì‹œì‘í•´ì£¼ì‹­ì‹œì˜¤.");
 			System.exit(1);
 		}
 		return returnValue;
@@ -525,30 +525,30 @@ public class StoreDeliverIO {
 		char yn, temp;
 		boolean returnValue = true;
 		new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-		System.out.println("ÀÔ·ÂÇÏ½Å Ãâ°í ±â·ÏÀÔ´Ï´Ù.");
-		System.out.println("Á¦Ç°ÀÌ¸ª: " + InputStore.getName());
-		System.out.println("Ãâ°í·®: " + InputStore.getAmount());
-		System.out.println("Ãâ°íÀÏÀÚ: " + InputStore.getDate());
-		System.out.println("Ãâ°í°¡: " + InputStore.getPrice());
-		System.out.println("¹°Ç°¹øÈ£: " + InputStore.getCode());
-		System.out.println("°Å·¡Ã³: " + InputStore.getClient());
-		System.out.print("À§ÀÇ ÀÔ·ÂÀÌ ¸Â½À´Ï±î(y/n)? ");
+		System.out.println("ì…ë ¥í•˜ì‹  ì¶œê³  ê¸°ë¡ì…ë‹ˆë‹¤.");
+		System.out.println("ì œí’ˆì´ë¦‰: " + InputStore.getName());
+		System.out.println("ì¶œê³ ëŸ‰: " + InputStore.getAmount());
+		System.out.println("ì¶œê³ ì¼ì: " + InputStore.getDate());
+		System.out.println("ì¶œê³ ê°€: " + InputStore.getPrice());
+		System.out.println("ë¬¼í’ˆë²ˆí˜¸: " + InputStore.getCode());
+		System.out.println("ê±°ë˜ì²˜: " + InputStore.getClient());
+		System.out.print("ìœ„ì˜ ì…ë ¥ì´ ë§ìŠµë‹ˆê¹Œ(y/n)? ");
 		yn = (char)System.in.read();
 		do {
 			temp = (char) System.in.read();
 		}while(temp != '\n');
 		
 		if(!(yn == 'y' || yn == 'n' || yn == 'Y' || yn == 'N')) {
-			while (!(yn == 'y' || yn == 'n' || yn == 'Y' || yn == 'N')) { // y³ª nÀÌ ¾Æ´Ï¸é »õ·Î È®ÀÎ
+			while (!(yn == 'y' || yn == 'n' || yn == 'Y' || yn == 'N')) { // yë‚˜ nì´ ì•„ë‹ˆë©´ ìƒˆë¡œ í™•ì¸
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-				System.out.println("ÀÔ·ÂÇÏ½Å Ãâ°í ±â·ÏÀÔ´Ï´Ù.");
-				System.out.println("Á¦Ç°ÀÌ¸ª: " + InputStore.getName());
-				System.out.println("Ãâ°í·®: " + InputStore.getAmount());
-				System.out.println("Ãâ°íÀÏÀÚ: " + InputStore.getDate());
-				System.out.println("Ãâ°í°¡: " + InputStore.getPrice());
-				System.out.println("¹°Ç°¹øÈ£: " + InputStore.getCode());
-				System.out.println("°Å·¡Ã³: " + InputStore.getClient());
-				System.out.print("À§ÀÇ ÀÔ·ÂÀÌ ¸Â½À´Ï±î(y/n)? ");
+				System.out.println("ì…ë ¥í•˜ì‹  ì¶œê³  ê¸°ë¡ì…ë‹ˆë‹¤.");
+				System.out.println("ì œí’ˆì´ë¦‰: " + InputStore.getName());
+				System.out.println("ì¶œê³ ëŸ‰: " + InputStore.getAmount());
+				System.out.println("ì¶œê³ ì¼ì: " + InputStore.getDate());
+				System.out.println("ì¶œê³ ê°€: " + InputStore.getPrice());
+				System.out.println("ë¬¼í’ˆë²ˆí˜¸: " + InputStore.getCode());
+				System.out.println("ê±°ë˜ì²˜: " + InputStore.getClient());
+				System.out.print("ìœ„ì˜ ì…ë ¥ì´ ë§ìŠµë‹ˆê¹Œ(y/n)? ");
 				yn = (char)System.in.read();
 				do {
 					temp = (char) System.in.read();
@@ -561,7 +561,7 @@ public class StoreDeliverIO {
 		else if(yn == 'n' || yn == 'N')
 			returnValue = false;
 		else {
-			System.err.println("Ãâ°í±â·Ï È®ÀÎ ¿¡·¯. ½Ã½ºÅÛÀ» Àç½ÃÀÛÇØÁÖ½Ê½Ã¿À.");
+			System.err.println("ì¶œê³ ê¸°ë¡ í™•ì¸ ì—ëŸ¬. ì‹œìŠ¤í…œì„ ì¬ì‹œì‘í•´ì£¼ì‹­ì‹œì˜¤.");
 			System.exit(1);
 		}
 		return returnValue;
