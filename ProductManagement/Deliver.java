@@ -1,11 +1,5 @@
 package ProductManagement; // 한글로 물품관리
 
-import java.util.Scanner;
-import java.io.IOException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-
 public class Deliver { // 한글로 출고
 	/*
 		현재 status
@@ -20,7 +14,7 @@ public class Deliver { // 한글로 출고
 	private String deliverCode;
 	private String deliverClient;
 	
-	static public void main(String args[]) throws IOException, InterruptedException {
+	static public void main(String args[]) {
 		Deliver Temp = new Deliver();
 		Temp.inputDeliver();
 	}
@@ -28,10 +22,10 @@ public class Deliver { // 한글로 출고
 	public Deliver() {
 		this.deliverPrice = 0;
 		this.deliverAmount = 0;
-		// this.deliverDate = new String();
-		// this.deliverName = new String();
-		// this.deliverCode = new String();
-		// this.deliverClient = new String();
+		this.deliverDate = null;
+		this.deliverName = null;
+		this.deliverCode = null;
+		this.deliverClient = null;
 	}
 	
 	/*
@@ -44,6 +38,60 @@ public class Deliver { // 한글로 출고
 		this.deliverClient = "Samsung Electronics";
 	}
 	*/
+	
+	public Deliver(int i) {
+		switch(i) {
+		case 0:
+			this.deliverPrice = 10;
+			this.deliverAmount = 100;
+			this.deliverDate = "2017-12-25";
+			this.deliverName = "Samsung Galaxy Note 8";
+			this.deliverCode = "12345678901231";
+			this.deliverClient = "Samsung Electronics";
+			break;
+		case 1:
+			this.deliverPrice = 10;
+			this.deliverAmount = 100;
+			this.deliverDate = "2017-12-26";
+			this.deliverName = "Samsung Galaxy Note 8";
+			this.deliverCode = "12345678901231";
+			this.deliverClient = "Samsung Electronics";
+			break;
+		case 2:
+			this.deliverPrice = 10;
+			this.deliverAmount = 100;
+			this.deliverDate = "2017-11-25";
+			this.deliverName = "Samsung Galaxy Note 8";
+			this.deliverCode = "12345678901231";
+			this.deliverClient = "Samsung Electronics";
+			break;
+		case 3:
+			this.deliverPrice = 10;
+			this.deliverAmount = 100;
+			this.deliverDate = "2016-12-24";
+			this.deliverName = "Samsung Galaxy Note 8";
+			this.deliverCode = "12345678901231";
+			this.deliverClient = "Samsung Electronics";
+			break;
+		case 4:
+			this.deliverPrice = 10;
+			this.deliverAmount = 100;
+			this.deliverDate = "2017-12-25";
+			this.deliverName = "Samsung Galaxy Note 8";
+			this.deliverCode = "12345678901231";
+			this.deliverClient = "Samsung Electronics";
+			break;
+		case 5:
+			this.deliverPrice = 10;
+			this.deliverAmount = 100;
+			this.deliverDate = "2018-12-25";
+			this.deliverName = "Samsung Galaxy Note 8";
+			this.deliverCode = "12345678901231";
+			this.deliverClient = "Samsung Electronics";
+			break;
+		}
+	}
+	
 	public void setPrice(int Price) {
 		this.deliverPrice = Price;
 	}
@@ -76,7 +124,7 @@ public class Deliver { // 한글로 출고
 		return this.deliverAmount;
 	}
 	
-	public String getDate() {
+	public String getDeliverDate() {
 		return new String(this.deliverDate);
 	}
 	
@@ -92,90 +140,46 @@ public class Deliver { // 한글로 출고
 		return new String(this.deliverClient);
 	}
 	
-	public void inputDeliver() throws IOException, InterruptedException {
-		Scanner Input = new Scanner(System.in);
-		String StrTemp;
-		int IntTemp;
-		
-		// Eclipse 콘솔 창에서 실시하면 한글 입력 시 문제가 있습니다. 입력할 때 curser를 수동으로 조정해야줘야 해요(...)
-		// UI 디자인할 때, 입력값을 받아서 반환받는 방법을 사용하는게 좋을 듯. Switch 같은걸 쓰면 구현가능.
-		System.out.println("상품 이름을 입력해주십시오");
-		this.setName(Input.nextLine());
-		System.out.println("거래처명을 입력해주십시오");
-		this.setClient(Input.nextLine());
-		
-		System.out.println("출고일자를 입력해주십시오(yyyy-MM-dd)");
-		StrTemp = Input.nextLine();
-		while(checkDate(StrTemp) != true) {
-			System.out.println("Invaild Format. yyyy-MM-dd에 맞춰서 다시 입력해주십시오.");
-			StrTemp = Input.nextLine();
-		}
-		this.setDate(StrTemp);
-		
-		System.out.println("물품번호를 입력해주십시오");
-		StrTemp = Input.nextLine();
-		while(StrTemp.length() < 13) {
-			System.out.println("Invaild Format. 물품번호 길이에 맞춰 입력해주십시오.");
-			StrTemp = Input.nextLine();
-		}
-		this.setCode(StrTemp);
-		
-		System.out.println("판매가격을 원 단위(\\)로 입력해주십시오");
-		IntTemp = Input.nextInt();
-		while(IntTemp <= 0) {
-			System.out.println("Invalid value. 가격을 다시 입력해주세요");
-			IntTemp = Input.nextInt();
-		}
-		this.setPrice(Input.nextInt());
-		
-		System.out.println("출고 수량을 입력해주십시오");
-		IntTemp = Input.nextInt();
-		while(IntTemp <= 0) {
-			System.out.println("Invalid value. 출고수량을 다시 입력해주세요");
-			IntTemp = Input.nextInt();
-		}
-		this.setAmount(IntTemp);
-		
-		new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-		
-		System.out.println("Name: " + this.getName());
-		System.out.println("Amount: " + this.getAmount());
-		System.out.println("Date: " + this.getDate());
-		System.out.println("Price: " + this.getPrice());
-		System.out.println("Code: " + this.getCode());
-		System.out.println("Client: " + this.getClient());
-		
-		Product LoadProduct = ProductList._searchProduct();
-		LoadProduct.updateProductList(null, this.getAmount(), -1); // 정보 업데이트
-		saveDeliver(this); // 맨 마지막에 실시
+	public String toString() {
+		return deliverName + "\t" + deliverAmount + "\t" + deliverDate + "\t" + deliverPrice + "\t" + deliverCode + "\t" + deliverClient;
 	}
 	
-	private boolean checkDate(String CheckDate) {
-		SimpleDateFormat DateFormat = new SimpleDateFormat();
-		Date Date = new Date();
-		System.out.println(CheckDate);
-		DateFormat.applyPattern("yyyy-MM-dd");
-		DateFormat.setLenient(false);
+	public boolean inputDeliver() {
+		boolean returnValue = true;
+		ProductList List = new ProductList();
 		
-		try {
-			Date = DateFormat.parse(CheckDate);
-		} catch(ParseException e) {
-			// System.out.println("false");
-			return false;
+		Product LoadProduct = List._searchProduct();
+		// Product LoadProduct = List.searchProduct(this.deliverCode);
+		if(LoadProduct == null) { // 물품번호를 확인해서 해당 물품이 있는지 확인해서 적용
+			returnValue = false;
+		} else {
+			if(LoadProduct.updateProductList(null, this.getAmount(), -1) == true) { // 정보 업데이트
+				saveDeliver(this); // 맨 마지막에 실시
+			} else {
+				returnValue = false;
+			}
 		}
-		// System.out.println("true");
-		return true;
+		return returnValue;
 	}
 	
-	public void searchDeliver() {
-		
+	public Deliver searchDeliver() {
+		Deliver result = null;
+		return result;
+	}
+	
+	public int returnTotalDeliverAmount(String BarCode) {
+		// file로부터 data를 load해서 return받은 Array를 List에 저장.
+		// 그 후 입력받은 Barcode를 바탕으로 총 입고량을 계산해서 반환
+		Deliver[] DeliverList;
+		int TotalAmount = 0;
+		return TotalAmount;
 	}
 	
 	private void saveDeliver(Deliver Input) { // 생성한 class를 file로 저장
 		System.out.println("이 method는 출고 정보를 file에 저장시킵니다.");
 		System.out.println("Name: " + Input.getName());
 		System.out.println("Amount: " + Input.getAmount());
-		System.out.println("Date: " + Input.getDate());
+		System.out.println("Date: " + Input.getDeliverDate());
 		System.out.println("Price: " + Input.getPrice());
 		System.out.println("Code: " + Input.getCode());
 		System.out.println("Client: " + Input.getClient());
