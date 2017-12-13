@@ -1,11 +1,17 @@
-package ProductManagement; // í•œê¸€ë¡œ ë¬¼í’ˆê´€ë¦¬
+package ProductManagement; // ÇÑ±Û·Î ¹°Ç°°ü¸®
 
-public class Store { // í•œê¸¸ë¡œ ì…ê³ 
+import java.util.Scanner;
+import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
+public class Store { // ÇÑ±æ·Î ÀÔ°í
 	/*
-		í˜„ì¬ status
-	- inputStore method ì‘ì„±ì¤‘.
-	- searchStore method ì‘ì„± í•„ìš”.
-	- saveStore methodëŠ” File I/O class ì™„ì„± ì „ê¹Œì§€ ì‘ì„± ëŒ€ê¸°
+		ÇöÀç status
+	- inputStore method ÀÛ¼ºÁß.
+	- searchStore method ÀÛ¼º ÇÊ¿ä.
+	- saveStore method´Â File I/O class ¿Ï¼º Àü±îÁö ÀÛ¼º ´ë±â
 	*/
 	
 	private int storePrice;
@@ -15,13 +21,18 @@ public class Store { // í•œê¸¸ë¡œ ì…ê³ 
 	private String storeCode;
 	private String storeClient;
 	
+	static public void main(String args[]) throws IOException, InterruptedException {
+		Store Temp = new Store();
+		Temp.inputStore();
+	}
+	
 	public Store() {
 		this.storePrice = 0;
 		this.storeAmount = 0;
-		this.storeDate = null;
-		this.storeName = null;
-		this.storeCode = null;
-		this.storeClient = null;
+		// this.storeDate = new String();
+		// this.storeName = new String();
+		// this.storeCode = new String();
+		// this.storeClient = new String();
 	}
 	
 	/*
@@ -51,8 +62,8 @@ public class Store { // í•œê¸¸ë¡œ ì…ê³ 
 	}
 	
 	public void setCode(String Code) {
-		// ë°”ì½”ë“œ ë²ˆí˜¸ë¥¼ ì…ë ¥ë°›ì•„ì„œ ë¬¼í’ˆë²ˆí˜¸ë¡œ ë³€í™˜ì‹œí‚¨ë‹¤.
-		// ì´ë¥¼ ìœ„í•´ì„œ, ë¬¼í’ˆëª©ë¡ì„ ì½ì–´ì„œ ê°€ì¥ ë§ˆì§€ë§‰ ìˆ«ìë¥¼ ë¶€ì—¬í•œë‹¤.
+		// ¹ÙÄÚµå ¹øÈ£¸¦ ÀÔ·Â¹Ş¾Æ¼­ ¹°Ç°¹øÈ£·Î º¯È¯½ÃÅ²´Ù.
+		// ÀÌ¸¦ À§ÇØ¼­, ¹°Ç°¸ñ·ÏÀ» ÀĞ¾î¼­ °¡Àå ¸¶Áö¸· ¼ıÀÚ¸¦ ºÎ¿©ÇÑ´Ù.
 		this.storeCode = new String(Code);
 	}
 	
@@ -84,29 +95,111 @@ public class Store { // í•œê¸¸ë¡œ ì…ê³ 
 		return new String(this.storeClient);
 	}
 	
-	public void inputStore(String ExpirationDate, String Container, int OriginalPrice, int Inadequate) {
-		// Eclipse ì½˜ì†” ì°½ì—ì„œ ì‹¤ì‹œí•˜ë©´ í•œê¸€ ì…ë ¥ ì‹œ ë¬¸ì œê°€ ìˆìŠµë‹ˆë‹¤. ì…ë ¥í•  ë•Œ curserë¥¼ ìˆ˜ë™ìœ¼ë¡œ ì¡°ì •í•´ì•¼ì¤˜ì•¼ í•´ìš”(...)
-		// UI ë””ìì¸í•  ë•Œ, ì…ë ¥ê°’ì„ ë°›ì•„ì„œ ë°˜í™˜ë°›ëŠ” ë°©ë²•ì„ ì‚¬ìš©í•˜ëŠ”ê²Œ ì¢‹ì„ ë“¯. Switch ê°™ì€ê±¸ ì“°ë©´ êµ¬í˜„ê°€ëŠ¥.
-		Product MadeProduct = new Product(ExpirationDate, Container, OriginalPrice, Inadequate); // ìƒì„±ìë¥¼ í†µí•´ ì œí’ˆ ì •ë³´ ìƒì„± í›„ ì €ì¥ëœë‹¤.
-		MadeProduct.updateProductList(this, -1, -1); // ì •ë³´ ì—…ë°ì´íŠ¸
-		saveStore(this); // ë§¨ ë§ˆì§€ë§‰ ë¶€ë¶„ì— ì‹¤ì‹œ
+	public void inputStore() throws IOException, InterruptedException {
+		Scanner Input = new Scanner(System.in);
+		String StrTemp;
+		int IntTemp;
+		String ExpirationDate;
+		String Container;
+		int OriginalPrice;
+		
+		// Eclipse ÄÜ¼Ö Ã¢¿¡¼­ ½Ç½ÃÇÏ¸é ÇÑ±Û ÀÔ·Â ½Ã ¹®Á¦°¡ ÀÖ½À´Ï´Ù. ÀÔ·ÂÇÒ ¶§ curser¸¦ ¼öµ¿À¸·Î Á¶Á¤ÇØ¾ßÁà¾ß ÇØ¿ä(...)
+		// UI µğÀÚÀÎÇÒ ¶§, ÀÔ·Â°ªÀ» ¹Ş¾Æ¼­ ¹İÈ¯¹Ş´Â ¹æ¹ıÀ» »ç¿ëÇÏ´Â°Ô ÁÁÀ» µí. Switch °°Àº°É ¾²¸é ±¸Çö°¡´É.
+		System.out.println("»óÇ° ÀÌ¸§À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		this.setName(Input.nextLine());
+		System.out.println("°Å·¡Ã³¸íÀ» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		this.setClient(Input.nextLine());
+		System.out.println("Ã¢°íÀÌ¸§ ¶Ç´Â À§Ä¡¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		Container = new String(Input.nextLine());
+		
+		System.out.println("ÀÔ°íÀÏÀÚ¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À(yyyy-MM-dd)");
+		StrTemp = Input.nextLine();
+		while(checkDate(StrTemp) != true) {
+			System.out.println("Invaild Format. yyyy-MM-dd¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			StrTemp = Input.nextLine();
+		}
+		this.setDate(StrTemp);
+		
+		System.out.println("¹ÙÄÚµå¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		StrTemp = Input.nextLine();
+		while(StrTemp.length() < 13) {
+			System.out.println("Invaild Format. ¹ÙÄÚµå ¹øÈ£ ±æÀÌ¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			StrTemp = Input.nextLine();
+		}
+		this.setCode(StrTemp);
+		
+		System.out.println("À¯Åë±âÇÑÀ» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À(yyyy-MM-dd) (¾ø´Â Á¦Ç°ÀÌ¸é '0000-00-00'À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À)");
+		StrTemp = Input.nextLine();
+		while(checkDate(StrTemp) != true) {
+			System.out.println("Invaild Format. yyyy-MM-dd¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			StrTemp = Input.nextLine();
+		}
+		ExpirationDate = new String(StrTemp);
+		
+		System.out.println("ÆÇ¸Å°¡°İÀ» ¿ø ´ÜÀ§(\\)·Î ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		IntTemp = Input.nextInt();
+		while(IntTemp <= 0) {
+			System.out.println("Invalid value. °¡°İÀ» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			IntTemp = Input.nextInt();
+		}
+		this.setPrice(Input.nextInt());
+		
+		System.out.println("ÀÔ°í ¼ö·®À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		IntTemp = Input.nextInt();
+		while(IntTemp <= 0) {
+			System.out.println("Invalid value. Ãâ°í¼ö·®À» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			IntTemp = Input.nextInt();
+		}
+		this.setAmount(IntTemp);
+		
+		System.out.println("¿ø°¡¸¦ ¿ø ´ÜÀ§(\\)·Î ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		IntTemp = Input.nextInt();
+		while(IntTemp <= 0) {
+			System.out.println("Invalid value. °¡°İÀ» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			IntTemp = Input.nextInt();
+		}
+		OriginalPrice = IntTemp;
+		
+		new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+		
+		System.out.println("Name: " + this.getName());
+		System.out.println("Amount: " + this.getAmount());
+		System.out.println("Date: " + this.getDate());
+		System.out.println("Price: " + this.getPrice());
+		System.out.println("Code: " + this.getCode());
+		System.out.println("Client: " + this.getClient());
+		System.out.println("ExpirationDate: " + ExpirationDate);
+		System.out.println("Container: " + Container);
+		System.out.println("OriginalPrice: " + OriginalPrice);
+		
+		Product MadeProduct = new Product(ExpirationDate, Container, OriginalPrice); // »ı¼ºÀÚ¸¦ ÅëÇØ Á¦Ç° Á¤º¸ »ı¼º ÈÄ ÀúÀåµÈ´Ù.
+		MadeProduct.updateProductList(this, -1, -1); // Á¤º¸ ¾÷µ¥ÀÌÆ®
+		saveStore(this); // ¸Ç ¸¶Áö¸· ºÎºĞ¿¡ ½Ç½Ã
 	}
 	
-	public Store searchStore() {
-		Store result = null;
-		return result;
+	private boolean checkDate(String CheckDate) {
+		SimpleDateFormat DateFormat = new SimpleDateFormat();
+		Date Date = new Date();
+		System.out.println(CheckDate);
+		DateFormat.applyPattern("yyyy-MM-dd");
+		DateFormat.setLenient(false);
+		
+		try {
+			Date = DateFormat.parse(CheckDate);
+		} catch(ParseException e) {
+			// System.out.println("false");
+			return false;
+		}
+		// System.out.println("true");
+		return true;
 	}
 	
-	public int returnTotalStoreAmount(String BarCode) {
-		// fileë¡œë¶€í„° dataë¥¼ loadí•´ì„œ Arrayì— ì €ì¥.
-		// ê·¸ í›„ ì…ë ¥ë°›ì€ Barcodeë¥¼ ë°”íƒ•ìœ¼ë¡œ ì´ ì…ê³ ëŸ‰ì„ ê³„ì‚°í•´ì„œ ë°˜í™˜
-		Store[] StoreList;
-		int TotalAmount = 0;
-		return TotalAmount;
+	public void searchStore() {
+		
 	}
 	
-	private void saveStore(Store Input) { // ìƒì„±í•œ classë¥¼ fileë¡œ ì €ì¥
-		System.out.println("ì´ methodëŠ” ì…ê³  ì •ë³´ë¥¼ fileì— ì €ì¥ì‹œí‚µë‹ˆë‹¤.");
+	private void saveStore(Store Input) { // »ı¼ºÇÑ class¸¦ file·Î ÀúÀå
+		System.out.println("ÀÌ method´Â ÀÔ°í Á¤º¸¸¦ file¿¡ ÀúÀå½ÃÅµ´Ï´Ù.");
 		System.out.println("Name: " + Input.getName());
 		System.out.println("Amount: " + Input.getAmount());
 		System.out.println("Date: " + Input.getDate());

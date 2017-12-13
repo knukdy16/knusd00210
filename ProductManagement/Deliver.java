@@ -1,11 +1,17 @@
-package ProductManagement; // í•œê¸€ë¡œ ë¬¼í’ˆê´€ë¦¬
+package ProductManagement; // ÇÑ±Û·Î ¹°Ç°°ü¸®
 
-public class Deliver { // í•œê¸€ë¡œ ì¶œê³ 
+import java.util.Scanner;
+import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
+public class Deliver { // ÇÑ±Û·Î Ãâ°í
 	/*
-		í˜„ì¬ status
-	- get, set method ì‘ì„± ì™„ë£Œ
-	- constructor ì‘ì„± ì™„ë£Œ. í…ŒìŠ¤íŠ¸ í•„ìš”
-	- ë¬¼í’ˆëª©ë¡ì €ì¥, ë¬¼í’ˆëª©ë¡ê°±ì‹  method ì‘ì„±ì¤‘.
+		ÇöÀç status
+	- get, set method ÀÛ¼º ¿Ï·á
+	- constructor ÀÛ¼º ¿Ï·á. Å×½ºÆ® ÇÊ¿ä
+	- ¹°Ç°¸ñ·ÏÀúÀå, ¹°Ç°¸ñ·Ï°»½Å method ÀÛ¼ºÁß.
 	 */
 	private int deliverPrice;
 	private int deliverAmount;
@@ -14,7 +20,7 @@ public class Deliver { // í•œê¸€ë¡œ ì¶œê³ 
 	private String deliverCode;
 	private String deliverClient;
 	
-	static public void main(String args[]) {
+	static public void main(String args[]) throws IOException, InterruptedException {
 		Deliver Temp = new Deliver();
 		Temp.inputDeliver();
 	}
@@ -22,10 +28,10 @@ public class Deliver { // í•œê¸€ë¡œ ì¶œê³ 
 	public Deliver() {
 		this.deliverPrice = 0;
 		this.deliverAmount = 0;
-		this.deliverDate = null;
-		this.deliverName = null;
-		this.deliverCode = null;
-		this.deliverClient = null;
+		// this.deliverDate = new String();
+		// this.deliverName = new String();
+		// this.deliverCode = new String();
+		// this.deliverClient = new String();
 	}
 	
 	/*
@@ -86,27 +92,87 @@ public class Deliver { // í•œê¸€ë¡œ ì¶œê³ 
 		return new String(this.deliverClient);
 	}
 	
-	public void inputDeliver() {
+	public void inputDeliver() throws IOException, InterruptedException {
+		Scanner Input = new Scanner(System.in);
+		String StrTemp;
+		int IntTemp;
+		
+		// Eclipse ÄÜ¼Ö Ã¢¿¡¼­ ½Ç½ÃÇÏ¸é ÇÑ±Û ÀÔ·Â ½Ã ¹®Á¦°¡ ÀÖ½À´Ï´Ù. ÀÔ·ÂÇÒ ¶§ curser¸¦ ¼öµ¿À¸·Î Á¶Á¤ÇØ¾ßÁà¾ß ÇØ¿ä(...)
+		// UI µğÀÚÀÎÇÒ ¶§, ÀÔ·Â°ªÀ» ¹Ş¾Æ¼­ ¹İÈ¯¹Ş´Â ¹æ¹ıÀ» »ç¿ëÇÏ´Â°Ô ÁÁÀ» µí. Switch °°Àº°É ¾²¸é ±¸Çö°¡´É.
+		System.out.println("»óÇ° ÀÌ¸§À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		this.setName(Input.nextLine());
+		System.out.println("°Å·¡Ã³¸íÀ» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		this.setClient(Input.nextLine());
+		
+		System.out.println("Ãâ°íÀÏÀÚ¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À(yyyy-MM-dd)");
+		StrTemp = Input.nextLine();
+		while(checkDate(StrTemp) != true) {
+			System.out.println("Invaild Format. yyyy-MM-dd¿¡ ¸ÂÃç¼­ ´Ù½Ã ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			StrTemp = Input.nextLine();
+		}
+		this.setDate(StrTemp);
+		
+		System.out.println("¹°Ç°¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		StrTemp = Input.nextLine();
+		while(StrTemp.length() < 13) {
+			System.out.println("Invaild Format. ¹°Ç°¹øÈ£ ±æÀÌ¿¡ ¸ÂÃç ÀÔ·ÂÇØÁÖ½Ê½Ã¿À.");
+			StrTemp = Input.nextLine();
+		}
+		this.setCode(StrTemp);
+		
+		System.out.println("ÆÇ¸Å°¡°İÀ» ¿ø ´ÜÀ§(\\)·Î ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		IntTemp = Input.nextInt();
+		while(IntTemp <= 0) {
+			System.out.println("Invalid value. °¡°İÀ» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			IntTemp = Input.nextInt();
+		}
+		this.setPrice(Input.nextInt());
+		
+		System.out.println("Ãâ°í ¼ö·®À» ÀÔ·ÂÇØÁÖ½Ê½Ã¿À");
+		IntTemp = Input.nextInt();
+		while(IntTemp <= 0) {
+			System.out.println("Invalid value. Ãâ°í¼ö·®À» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			IntTemp = Input.nextInt();
+		}
+		this.setAmount(IntTemp);
+		
+		new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+		
+		System.out.println("Name: " + this.getName());
+		System.out.println("Amount: " + this.getAmount());
+		System.out.println("Date: " + this.getDate());
+		System.out.println("Price: " + this.getPrice());
+		System.out.println("Code: " + this.getCode());
+		System.out.println("Client: " + this.getClient());
+		
 		Product LoadProduct = ProductList._searchProduct();
-		LoadProduct.updateProductList(null, this.getAmount(), -1); // ì •ë³´ ì—…ë°ì´íŠ¸
-		saveDeliver(this); // ë§¨ ë§ˆì§€ë§‰ì— ì‹¤ì‹œ
+		LoadProduct.updateProductList(null, this.getAmount(), -1); // Á¤º¸ ¾÷µ¥ÀÌÆ®
+		saveDeliver(this); // ¸Ç ¸¶Áö¸·¿¡ ½Ç½Ã
 	}
 	
-	public Deliver searchDeliver() {
-		Deliver result = null;
-		return result;
+	private boolean checkDate(String CheckDate) {
+		SimpleDateFormat DateFormat = new SimpleDateFormat();
+		Date Date = new Date();
+		System.out.println(CheckDate);
+		DateFormat.applyPattern("yyyy-MM-dd");
+		DateFormat.setLenient(false);
+		
+		try {
+			Date = DateFormat.parse(CheckDate);
+		} catch(ParseException e) {
+			// System.out.println("false");
+			return false;
+		}
+		// System.out.println("true");
+		return true;
 	}
 	
-	public int returnTotalDeliverAmount(String BarCode) {
-		// fileë¡œë¶€í„° dataë¥¼ loadí•´ì„œ returnë°›ì€ Arrayë¥¼ Listì— ì €ì¥.
-		// ê·¸ í›„ ì…ë ¥ë°›ì€ Barcodeë¥¼ ë°”íƒ•ìœ¼ë¡œ ì´ ì…ê³ ëŸ‰ì„ ê³„ì‚°í•´ì„œ ë°˜í™˜
-		Deliver[] DeliverList;
-		int TotalAmount = 0;
-		return TotalAmount;
+	public void searchDeliver() {
+		
 	}
 	
-	private void saveDeliver(Deliver Input) { // ìƒì„±í•œ classë¥¼ fileë¡œ ì €ì¥
-		System.out.println("ì´ methodëŠ” ì¶œê³  ì •ë³´ë¥¼ fileì— ì €ì¥ì‹œí‚µë‹ˆë‹¤.");
+	private void saveDeliver(Deliver Input) { // »ı¼ºÇÑ class¸¦ file·Î ÀúÀå
+		System.out.println("ÀÌ method´Â Ãâ°í Á¤º¸¸¦ file¿¡ ÀúÀå½ÃÅµ´Ï´Ù.");
 		System.out.println("Name: " + Input.getName());
 		System.out.println("Amount: " + Input.getAmount());
 		System.out.println("Date: " + Input.getDate());

@@ -1,77 +1,43 @@
-package ProductManagement; // í•œê¸€ë¡œ ë¬¼í’ˆê´€ë¦¬
+package ProductManagement; // ÇÑ±Û·Î ¹°Ç°°ü¸®
 
-import java.util.Arrays;
-
-public class ProductList { // í•œê¸€ë¡œ ë¬¼í’ˆëª©ë¡
+public class ProductList { // ÇÑ±Û·Î ¹°Ç°¸ñ·Ï
 	/*
-		í˜„ì¬ status
-	- ë¬¼í’ˆê²€ìƒ‰ method ì‘ì„±í•„ìš”.
+		ÇöÀç status
+	- ¹°Ç°°Ë»ö method ÀÛ¼ºÇÊ¿ä.
 	*/
 	
-	private Product[] List;
-	// ë¬¼í’ˆì— ëŒ€í•œ Arrayë¥¼ ë‹´ê³  ìˆë‹¤ê³  ìƒê°í•˜ì.
-	// ì •ë ¬í•´ì„œ ì¶œë ¥í•˜ê³ ì í•  ê²½ìš°, Array ìì²´ë¥¼ ê°–ê³  ì •ë ¬ í›„, ê±°ê¸°ì„œ ì›í•˜ëŠ” ë²”ìœ„ì˜ dataì— í•´ë‹¹í•˜ëŠ”ì§€ í™•ì¸ í›„ í•´ë‹¹í•˜ëŠ” ì •ë³´ë§Œ ì¶œë ¥
-	
-	static public void main(String args[]) {
-		ProductList test = new ProductList();
-		Product[] list;
-		list = test._getProductList();
-		for(int i = 0; i < 6; i++) {
-			System.out.println("Name: " + list[i].getName());
-			System.out.println("Amount: " + list[i].getAmount());
-			System.out.println("BarCode: " + list[i].getBarCode());
-			System.out.println("ProductCode: " + list[i].getProductCode());
-			System.out.println("--------------------------------------------------");
-		}
-	}
+	// ¹°Ç°¿¡ ´ëÇÑ Array¸¦ ´ã°í ÀÖ´Ù°í »ı°¢ÇÏÀÚ.
+	// Á¤·ÄÇØ¼­ Ãâ·ÂÇÏ°íÀÚ ÇÒ °æ¿ì, Array ÀÚÃ¼¸¦ °®°í Á¤·Ä ÈÄ, °Å±â¼­ ¿øÇÏ´Â ¹üÀ§ÀÇ data¿¡ ÇØ´çÇÏ´ÂÁö È®ÀÎ ÈÄ ÇØ´çÇÏ´Â Á¤º¸¸¸ Ãâ·Â
 	
 	public ProductList() {
-		List = null;
-	}
-	
-	public void setProductList() { // Product Object's Arrayë¥¼ ìƒì„±
 		
 	}
 	
-	public void _setProductList() { // Product Object's Arrayë¥¼ ìƒì„±
+	public void setProductList() { // Product Object's Array¸¦ »ı¼º
 		
 	}
 	
-	public Product[] getProductList() { // Product Object's Arrayë¥¼ ë°˜í™˜
-		Arrays.sort(List, new CompatatorProduct());
-		return List;
-		// ë°˜í™˜ë°›ì€ Arrayë¡œ ì¶œë ¥ ë“±ì— í™œìš©
+	public void getProductList() { // Product Object's Array¸¦ ¹İÈ¯
+		return;
+		// ¹İÈ¯¹ŞÀº Array·Î Ãâ·Â µî¿¡ È°¿ë
 	}
 	
-	public Product[] _getProductList() { // Product Object's Arrayë¥¼ ë°˜í™˜
-		int index = 6;
-		List = new Product[index];
-		for(int i = 0; i < 6; i++) {
-			List[i] = new Product(i);
-		}
-		
-		Arrays.sort(List, new CompatatorProduct());
-		
-		return List;
-		// ë°˜í™˜ë°›ì€ Arrayë¡œ ì¶œë ¥ ë“±ì— í™œìš©
-	}
-	
-	static public Product searchProduct(String ProductCode) { // ë¬¼í’ˆê²€ìƒ‰(). ì •ë³´ë¥¼ ì…ë ¥ë°›ì•„ì„œ Product Object's Arrayì—ì„œ í•´ë‹¹í•˜ëŠ” ì •ë³´ë¥¼ ì°¾ì•„ì„œ Product ê°ì²´ë¥¼ ë°˜í™˜.
+	static public Product searchProduct(String ProductCode) { // ¹°Ç°°Ë»ö(). Á¤º¸¸¦ ÀÔ·Â¹Ş¾Æ¼­ Product Object's Array¿¡¼­ ÇØ´çÇÏ´Â Á¤º¸¸¦ Ã£¾Æ¼­ Product °´Ã¼¸¦ ¹İÈ¯.
 		Product Search = null;
 		
-		// Arrayë¡œë¶€í„° Data ìˆëŠ”ì§€ í™•ì¸
+		// Array·ÎºÎÅÍ Data ÀÖ´ÂÁö È®ÀÎ
 		
 		return Search;
 	}
 	
-	static public Product _searchProduct() { // ë¬¼í’ˆê²€ìƒ‰(). ì •ë³´ë¥¼ ì…ë ¥ë°›ì•„ì„œ Product ê°ì²´ë¥¼ ë°˜í™˜. ë°˜í™˜ì˜ˆì‹œë¥¼ ìœ„í•œ exampleë¡œ, ì œì¶œ ì „ì— ì‚­ì œ ìš”ë§.
+	static public Product _searchProduct() { // ¹°Ç°°Ë»ö(). Á¤º¸¸¦ ÀÔ·Â¹Ş¾Æ¼­ Product °´Ã¼¸¦ ¹İÈ¯. ¹İÈ¯¿¹½Ã¸¦ À§ÇÑ example·Î, Á¦Ãâ Àü¿¡ »èÁ¦ ¿ä¸Á.
 		Product Search = new Product();
 		Search.setClient("Samsung Electronics");
 		Search.setName("Samsung Galaxy Note 8");
 		Search.setBarCode("1234567890123");
 		Search.setProductCode("12345678901231");
 		Search.setExpirationDate("0000-00-00");
-		Search.setContainer("ëŒ€êµ¬ê´‘ì—­ì‹œ ë¶êµ¬ ì‚°ê²©3ë™ ëŒ€í•™ë¡œ 30");
+		Search.setContainer("´ë±¸±¤¿ª½Ã ºÏ±¸ »ê°İ3µ¿ ´ëÇĞ·Î 30");
 		Search.setNormalPrice(1100000);
 		Search.setDiscountRate(0);
 		Search.setBuyingPrice();
@@ -79,6 +45,4 @@ public class ProductList { // í•œê¸€ë¡œ ë¬¼í’ˆëª©ë¡
 		Search.setAmount(100);
 		return new Product(Search);
 	}
-	
-	
 }
