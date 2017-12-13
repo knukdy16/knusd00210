@@ -1,5 +1,9 @@
 package ProductManagement; // 한글로 물품관리
 
+import java.io.IOException;
+
+import DataManagement.ProductFile;
+
 public class Product { // 한글로 물품
 	/*
 		현재 status
@@ -36,105 +40,6 @@ public class Product { // 한글로 물품
 		this.Inadequate = 0;
 	}
 	
-	/*
-	public Product() {
-		this.Client = "Samsung Electronics";
-		this.Name = "Samsung Galaxy Note 8";
-		this.BarCode = "1234567890123";
-		this.ProductCode = "12345678901231";
-		this.ExpirationDate = "0000-00-00";
-		this.Container = "대구광역시 북구 산격3동 대학로30";
-		this.NormalPrice = 1100000;
-		this.BuyingPrice = 1100000;
-		this.OriginalPrice = 1000000;
-		this.Amount = 10;
-		this.DiscountRate = 0;
-	}
-	*/
-	public Product(int i) { // 바코드번호 정렬 테스트용
-		switch(i) {
-		case 0:
-			this.Client = "Samsung Electronics";
-			this.Name = "Samsung Galaxy Note 8_SKT";
-			this.BarCode = "1234567890123";
-			this.ProductCode = "12345678901231";
-			this.ExpirationDate = "0000-00-00";
-			this.Container = "대구광역시 북구 산격3동 대학로30";
-			this.NormalPrice = 1100000;
-			this.BuyingPrice = 1100000;
-			this.OriginalPrice = 1000000;
-			this.Amount = 10;
-			this.DiscountRate = 0;
-			break;
-		case 1:
-			this.Client = "Samsung Electronics";
-			this.Name = "Samsung Galaxy Note 8_KT";
-			this.BarCode = "1234567890124";
-			this.ProductCode = "12345678901241";
-			this.ExpirationDate = "0000-00-00";
-			this.Container = "대구광역시 북구 산격3동 대학로30";
-			this.NormalPrice = 1100000;
-			this.BuyingPrice = 1100000;
-			this.OriginalPrice = 1000000;
-			this.Amount = 10;
-			this.DiscountRate = 0;
-			break;
-		case 2:
-			this.Client = "Samsung Electronics";
-			this.Name = "Samsung Galaxy Note 8_UPLUS";
-			this.BarCode = "1234567890125";
-			this.ProductCode = "12345678901251";
-			this.ExpirationDate = "0000-00-00";
-			this.Container = "대구광역시 북구 산격3동 대학로30";
-			this.NormalPrice = 1100000;
-			this.BuyingPrice = 1100000;
-			this.OriginalPrice = 1000000;
-			this.Amount = 10;
-			this.DiscountRate = 0;
-			break;
-		case 3:
-			this.Client = "Samsung Electronics";
-			this.Name = "Samsung Galaxy Note 8_KT";
-			this.BarCode = "1234567890124";
-			this.ProductCode = "12345678901242";
-			this.ExpirationDate = "0000-00-00";
-			this.Container = "대구광역시 북구 산격3동 대학로30";
-			this.NormalPrice = 1100000;
-			this.BuyingPrice = 1100000;
-			this.OriginalPrice = 1000000;
-			this.Amount = 10;
-			this.DiscountRate = 0;
-			break;
-		case 4:
-			this.Client = "Samsung Electronics";
-			this.Name = "Samsung Galaxy Note 8_SKT";
-			this.BarCode = "1234567890123";
-			this.ProductCode = "12345678901232";
-			this.ExpirationDate = "0000-00-00";
-			this.Container = "대구광역시 북구 산격3동 대학로30";
-			this.NormalPrice = 1100000;
-			this.BuyingPrice = 1100000;
-			this.OriginalPrice = 1000000;
-			this.Amount = 10;
-			this.DiscountRate = 0;
-			break;
-		case 5:
-			this.Client = "Samsung Electronics";
-			this.Name = "Samsung Galaxy Note 8_SKT";
-			this.BarCode = "1234567890123";
-			this.ProductCode = "12345678901233";
-			this.ExpirationDate = "0000-00-00";
-			this.Container = "대구광역시 북구 산격3동 대학로30";
-			this.NormalPrice = 1100000;
-			this.BuyingPrice = 1100000;
-			this.OriginalPrice = 1000000;
-			this.Amount = 10;
-			this.DiscountRate = 0;
-			break;
-		}
-	}
-	
-	
 	public Product(Product Search) {
 		this.Client = new String(Search.getClient());
 		this.Name = new String(Search.getName());
@@ -147,6 +52,7 @@ public class Product { // 한글로 물품
 		this.OriginalPrice = Search.getOriginalPrice();
 		this.Amount = Search.getAmount();
 		this.DiscountRate = Search.getDiscountRate();
+		this.Inadequate = Search.getInadequate();
 	}
 	
 	public Product(String ExpirationDate, String Container, int OriginalPrice, int Inadequate) {
@@ -253,30 +159,13 @@ public class Product { // 한글로 물품
 	public int getInadequate() {
 		return this.Inadequate;
 	}
-	/*
-	public boolean equals(Object otherObject)
-	{
-	    if (otherObject == null)
-	        return false;
-	    else if (getClass( ) != otherObject.getClass( ))
-	        return false;
-	    else
-	    {
-	        Date otherDate =
-	                      (Date)otherObject;
-	        return ( month.equals(otherDate.month)
-	                  && (day == otherDate.day)
-	                  && (year == otherDate.year) );
-	    }
-    } 
-	*/
 	
 	public String toString() {
 		// return storeName + "\t" + storeAmount + "\t" + storeDate + "\t" + storePrice + "\t" + storeCode + "\t" + storeClient;
 		return Name + "\t" + Client + "\t" + BarCode + "\t" + ProductCode + "\t" + ExpirationDate + "\t" + Container + "\t" + NormalPrice + "\t" + BuyingPrice + "\t" + OriginalPrice + "\t" + Amount + "\t" + DiscountRate + "\t" + Inadequate;
 	}
 	
-	public boolean updateProductList(Object StoreData, int amount, double rate) { // 물품목록갱신(). 작성중...
+	public boolean updateProductList(Object StoreData, int amount, double rate) throws IOException { // 물품목록갱신(). 작성중...
 		// update product data from Deliver or rate.
 		Store tempStore = new Store();
 		// boolean returnValue = true;
@@ -295,11 +184,9 @@ public class Product { // 한글로 물품
 				this.Amount = tempStore.getAmount();
 			}
 		} else if(rate >= 0) { // 할인율 갱신할 경우
-			System.out.println("할인율 갱신 테스트");
 			this.setDiscountRate(rate);
 			this.setBuyingPrice();
 		} else if(amount > 0) { // 출고 후 물품 정보를 갱신할 경우
-			System.out.println("출고량 적용 테스트");
 			System.out.println("적용 전 재고량: " + this.getAmount());
 			System.out.println("적용할 출고량: " + amount);
 			if((this.getAmount() - amount) < 0) {
@@ -317,20 +204,38 @@ public class Product { // 한글로 물품
 		return true;
 	}
 	
-	private void saveProductList(Product SaveData) { // 물품목록저장(). 작성 필요!
+	private void saveProductList(Product SaveData) throws IOException {
 		// Product Object를 받아와서 FileI/O 관련 Class를 Object로 생성해서 File에 저장
-		System.out.println("☆저장 테스트 문구★");
-		System.out.println("Name: " + this.getName());
-		System.out.println("Amount: " + this.getAmount());
-		System.out.println("OriginalPrice: " + this.getOriginalPrice());
-		System.out.println("BuyingPrice: " + this.getBuyingPrice());
-		System.out.println("DiscountRate: " + this.getDiscountRate());
-		System.out.println("BarCode: " + this.getBarCode());
-		System.out.println("ProductCode: " + this.getProductCode());
-		System.out.println("Client: " + this.getClient());
-		System.out.println("ExpirationDate: " + this.getExpirationDate());
-		System.out.println("Container: " + this.getContainer());
-		System.out.println("OriginalPrice: " + this.getOriginalPrice());
-		System.out.println("이 method는 물품 정보를 file로 저장하는 역할입니다.");
+		int i, index;
+		ProductFile Saver = new ProductFile();
+		ProductList ListContainer = new ProductList();
+		Product[] List = ListContainer.getProductList();
+		Product[] Temp;
+		
+		for(i = 0; i < List.length ; i++) {
+			if(SaveData.getProductCode().compareTo(List[i].getProductCode()) == 0) {
+				List[i] = new Product(SaveData);
+				break;
+			}
+		}
+		
+		if(!(i < List.length)) { // 끝까지 순회한 경우
+			// 새로 들어온 데이터가 마지막으로 추가된 배열 생성
+			index = List.length;
+			Temp = new Product[index];
+			for(int j = 0; j < Temp.length; j++) {
+				Temp[j] = new Product(List[j]);
+			}
+			
+			index = Temp.length + 1;
+			List = new Product[index];
+			
+			for(int j = 0; j < Temp.length; j++) {
+				List[j] = new Product(Temp[j]);
+			}
+			List[Temp.length] = new Product(SaveData);
+		}
+		
+		Saver.saveProductFile(List);
 	}
 }

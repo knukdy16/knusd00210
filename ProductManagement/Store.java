@@ -1,17 +1,12 @@
 package ProductManagement; // 한글로 물품관리
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import DataManagement.StoreDeliverFile;
 
 public class Store { // 한길로 입고
-	/*
-		현재 status
-	- inputStore method 작성중.
-	- searchStore method 작성 필요.
-	- saveStore method는 File I/O class 완성 전까지 작성 대기
-	*/
 	
 	private int storePrice;
 	private int storeAmount;
@@ -29,68 +24,13 @@ public class Store { // 한길로 입고
 		this.storeClient = null;
 	}
 	
-	/*
-	public Store() {
-		this.storePrice = 10;
-		this.storeAmount = 100;
-		this.storeDate = "2017-12-25";
-		this.storeName = "Samsung Galaxy Note 8";
-		this.storeCode = "12345678901231";
-		this.storeClient = "Samsung Electronics";
-	}
-	*/
-	
-	public Store(int i) {
-		switch(i) {
-		case 0:
-			this.storePrice = 10;
-			this.storeAmount = 100;
-			this.storeDate = "2017-12-25";
-			this.storeName = "Samsung Galaxy Note 8";
-			this.storeCode = "12345678901231";
-			this.storeClient = "Samsung Electronics";
-			break;
-		case 1:
-			this.storePrice = 10;
-			this.storeAmount = 100;
-			this.storeDate = "2017-12-26";
-			this.storeName = "Samsung Galaxy Note 8";
-			this.storeCode = "12345678901231";
-			this.storeClient = "Samsung Electronics";
-			break;
-		case 2:
-			this.storePrice = 10;
-			this.storeAmount = 100;
-			this.storeDate = "2017-11-25";
-			this.storeName = "Samsung Galaxy Note 8";
-			this.storeCode = "12345678901231";
-			this.storeClient = "Samsung Electronics";
-			break;
-		case 3:
-			this.storePrice = 10;
-			this.storeAmount = 100;
-			this.storeDate = "2016-12-24";
-			this.storeName = "Samsung Galaxy Note 8";
-			this.storeCode = "12345678901231";
-			this.storeClient = "Samsung Electronics";
-			break;
-		case 4:
-			this.storePrice = 10;
-			this.storeAmount = 100;
-			this.storeDate = "2017-12-25";
-			this.storeName = "Samsung Galaxy Note 8";
-			this.storeCode = "12345678901231";
-			this.storeClient = "Samsung Electronics";
-			break;
-		case 5:
-			this.storePrice = 10;
-			this.storeAmount = 100;
-			this.storeDate = "2018-12-25";
-			this.storeName = "Samsung Galaxy Note 8";
-			this.storeCode = "12345678901231";
-			this.storeClient = "Samsung Electronics";
-			break;
-		}
+	public Store(int Price, int Amount, String Date, String Name, String Code, String Client) {
+		this.storePrice = Price;
+		this.storeAmount = Amount;
+		this.storeDate = new String(Date);
+		this.storeName = new String(Name);
+		this.storeCode = new String(Code);
+		this.storeClient = new String(Client);
 	}
 	
 	public void setPrice(int Price) {
@@ -109,13 +49,29 @@ public class Store { // 한길로 입고
 		this.storeName = new String(Name);
 	}
 	
-	public void setCode(String Code) {
+	public void setCode(String Code) throws IOException {
 		Store[] List = null;
+		String TempBarCode;
+		int TempNumber = 1;
+		int ProductNumber = 1;
 		StoreDeliverFile LoadStore = new StoreDeliverFile();
-		List = LoadStore._loadStoreFile();
+		List = LoadStore.loadStoreFile();
+		if(List == null) {
+			this.storeCode = new String(Code + ProductNumber);
+			return;
+		}
+		for(int i = 0; i < List.length; i++) {
+			TempBarCode = List[i].getCode().substring(0, 13);
+			if(TempBarCode.compareTo(Code) == 0) {
+				TempNumber = Integer.parseInt(List[i].getCode().substring(13));
+				if(ProductNumber == TempNumber) {
+					ProductNumber++;
+				}
+			}
+		}
 		// 바코드 번호를 입력받아서 물품번호로 변환시킨다.
 		// 이를 위해서, 물품목록을 읽어서 가장 마지막 숫자를 부여한다.
-		this.storeCode = new String(Code);
+		this.storeCode = new String(Code + ProductNumber);
 	}
 	
 	public void setClient(String Client) {
@@ -150,7 +106,7 @@ public class Store { // 한길로 입고
 		return storeName + "\t" + storeAmount + "\t" + storeDate + "\t" + storePrice + "\t" + storeCode + "\t" + storeClient;
 	}
 	
-	public void inputStore(String ExpirationDate, String Container, int OriginalPrice, int Inadequate) {
+	public void inputStore(String ExpirationDate, String Container, int OriginalPrice, int Inadequate) throws IOException {
 		// Eclipse 콘솔 창에서 실시하면 한글 입력 시 문제가 있습니다. 입력할 때 curser를 수동으로 조정해야줘야 해요(...)
 		// UI 디자인할 때, 입력값을 받아서 반환받는 방법을 사용하는게 좋을 듯. Switch 같은걸 쓰면 구현가능.
 		Product MadeProduct = new Product(ExpirationDate, Container, OriginalPrice, Inadequate); // 생성자를 통해 제품 정보 생성 후 저장된다.
@@ -158,37 +114,77 @@ public class Store { // 한길로 입고
 		saveStore(this); // 맨 마지막 부분에 실시
 	}
 	
-	public Store searchStore() {
-		Store result = null;
-		return result;
-	}
-	
-	public int getTotalStoreAmount(String BarCode) {
+	public int getTotalStoreAmount(String Barcode) throws IOException {
 		// file로부터 data를 load해서 Array에 저장.
 		// 그 후 입력받은 Barcode를 바탕으로 총 입고량을 계산해서 반환
 		Store[] StoreList;
 		int TotalAmount = 0;
-		return TotalAmount;
-	}
-	
-	public int getTotalStoreAmount30(String BarCode) {
-		Store[] StoreList;
-		String CurrentDate = null;
-		long DateTemp = 0;
-		int TotalAmount = 0;
-		Date DateLoader = new Date();
-		//DateTemp = Date.getDate();
+		StoreDeliverFile LoadList = new StoreDeliverFile();
+		StoreList = LoadList.loadStoreFile();
+		
+		for(int i = 0; i < StoreList.length; i++) {
+			if(Barcode.compareTo(StoreList[i].getCode().substring(0, 13)) == 0) {
+				TotalAmount += StoreList[i].getAmount();
+			}
+		}
 		
 		return TotalAmount;
 	}
 	
-	private void saveStore(Store Input) { // 생성한 class를 file로 저장
-		System.out.println("이 method는 입고 정보를 file에 저장시킵니다.");
-		System.out.println("Name: " + Input.getName());
-		System.out.println("Amount: " + Input.getAmount());
-		System.out.println("Date: " + Input.getStoreDate());
-		System.out.println("Price: " + Input.getPrice());
-		System.out.println("Code: " + Input.getCode());
-		System.out.println("Client: " + Input.getClient());
+	public int getTotalStoreAmount30(String Barcode) throws Exception {
+		Store[] StoreList;
+		String CurrentDate = null;
+		long DateTemp = 0;
+		int TotalAmount = 0;
+		SimpleDateFormat Format = new SimpleDateFormat("yyyy-MM-dd");
+		Date CurrentTime = new Date();
+		CurrentDate = Format.format(CurrentTime);
+		
+		StoreDeliverFile LoadList = new StoreDeliverFile();
+		StoreList = LoadList.loadStoreFile();
+		
+		for(int i = 0; i < StoreList.length; i++) {
+			if(Barcode.compareTo(StoreList[i].getCode().substring(0, 13)) == 0) {
+				DateTemp = diffOfDate(StoreList[i].getStoreDate(), CurrentDate);
+				if(DateTemp >= 30) {
+					TotalAmount += StoreList[i].getAmount();
+				}
+			}
+		}
+		
+		return TotalAmount;
+	}
+	
+	public String getTotalStoreDate(String Barcode) throws IOException {
+		String returnValue = null;
+		String temp = null;
+		Store[] StoreList;
+		StoreDeliverFile LoadList = new StoreDeliverFile();
+		StoreList = LoadList.loadStoreFile();
+		for(int i = 0; i < StoreList.length; i++) {
+			if(Barcode.compareTo(StoreList[i].getCode().substring(0, 13)) == 0) {
+				temp = new String(StoreList[i].getStoreDate());
+				if(returnValue == null || returnValue.compareTo(temp) < 0) {
+					returnValue = new String(temp);
+				}
+			}
+		}
+		//String
+		return returnValue;
+	}
+	
+	private long diffOfDate(String begin, String end) throws Exception {
+		SimpleDateFormat Format = new SimpleDateFormat("yyyy-MM-dd");
+		Date beginDate = Format.parse(begin);
+		Date endDate = Format.parse(end);
+		long diff = endDate.getTime() - beginDate.getTime();
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+		
+		return diffDays;
+	}
+	
+	private void saveStore(Store Input) throws IOException { // 생성한 class를 file로 저장
+		StoreDeliverFile Saver = new StoreDeliverFile();
+		Saver.saveStoreFile(Input);
 	}
 }

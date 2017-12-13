@@ -9,23 +9,13 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 import DataManagement.StoreDeliverFile;
-
 import ProductManagement.ComparatorStore;
 import ProductManagement.ComparatorDeliver;
-import ProductManagement.Product;
 import ProductManagement.Store;
 import ProductManagement.Deliver;
 
 public class StoreDeliverIO {
-	static public void main(String args[]) throws IOException, InterruptedException {
-		StoreDeliverIO io = new StoreDeliverIO();
-		io.StoreInput();
-		//io.DeliverInput();
-		//io.StoreOutput();
-		//io.DeliverOutput();
-	}
-
-	public void StoreOutput() { // 출력할 범위를 입력받은 뒤, 범위에 해당하는 물품에 대해 출력
+	public void StoreOutput() throws IOException { // 출력할 범위를 입력받은 뒤, 범위에 해당하는 물품에 대해 출력
 		Scanner Input = new Scanner(System.in);
 		String StartDate = null;
 		String EndDate = null;
@@ -34,7 +24,7 @@ public class StoreDeliverIO {
 		Store[] List = null;
 		
 		StoreDeliverFile LoadStore = new StoreDeliverFile();
-		List = LoadStore._loadStoreFile();
+		List = LoadStore.loadStoreFile();
 		
 		System.out.println("입고 기록의 출력 범위를 입력해주십시오(시작날짜) (정하지 않을 경우, '-' 입력)");
 		StrTemp = Input.nextLine();
@@ -63,8 +53,6 @@ public class StoreDeliverIO {
 		
 		Arrays.sort(List, new ComparatorStore());
 		
-		// System.out.println("제품이름	입고량	입고일자	입고가	물품번호	거래처");
-
 		for(int i = 0; i < List.length; i++) {
 			if(StartDate.equals("-") == true) {
 				if(EndDate.equals("-") == true) { // 전체 범위
@@ -90,10 +78,11 @@ public class StoreDeliverIO {
 				}
 			}
 		}
+		System.out.println("출력순서 : <<제품이름, 입고량, 입고일자, 입고가, 물품번호, 거래처>>");
 		return;
 	}
 	
-	public void DeliverOutput() {
+	public void DeliverOutput() throws IOException {
 		Scanner Input = new Scanner(System.in);
 		String StartDate = null;
 		String EndDate = null;
@@ -102,7 +91,7 @@ public class StoreDeliverIO {
 		Deliver[] List = null;
 		
 		StoreDeliverFile LoadDeliver = new StoreDeliverFile();
-		List = LoadDeliver._loadDeliverFile();
+		List = LoadDeliver.loadDeliverFile();
 		
 		System.out.println("출고 기록의 출력 범위를 입력해주십시오(시작날짜) (정하지 않을 경우, '-' 입력)");
 		StrTemp = Input.nextLine();
@@ -130,9 +119,7 @@ public class StoreDeliverIO {
 		}
 		
 		Arrays.sort(List, new ComparatorDeliver());
-		
-		// System.out.println("제품이름	출고량	출고일자	출고가	물품번호	거래처");
-		
+
 		for(int i = 0; i < List.length; i++) {
 			if(StartDate.equals("-") == true) {
 				if(EndDate.equals("-") == true) { // 전체 범위
@@ -158,6 +145,7 @@ public class StoreDeliverIO {
 				}
 			}
 		}
+		System.out.println("출력순서 : <<제품이름, 출고량, 출고일자, 출고가, 물품번호, 거래처>>");
 		return;
 	}
 	
@@ -207,7 +195,7 @@ public class StoreDeliverIO {
 		System.out.println("바코드번호를 입력해주십시오");
 		StrTemp = Input.nextLine();
 		try {
-			Double.parseDouble(StrTemp);
+			Long.parseLong(StrTemp);
 			InputCheck = true;
 		} catch (NumberFormatException e){
 			InputCheck = false;
@@ -373,7 +361,7 @@ public class StoreDeliverIO {
 				System.out.println("유통기한을 입력해주십시오(yyyy-MM-dd)[" + ExpirationDate + "]");
 				StrTemp = Input.nextLine();
 				while(checkDate(StrTemp) != true) {
-					if(StrTemp.equals("0000-00-00"))
+					if(StrTemp.equals("-"))
 						break;
 					System.out.println("Invaild Format. yyyy-MM-dd에 맞춰서 다시 입력해주십시오.");
 					StrTemp = Input.nextLine();
@@ -500,7 +488,7 @@ public class StoreDeliverIO {
 		System.out.println("물품 번호를 입력해주십시오");
 		StrTemp = Input.nextLine();
 		try {
-			Double.parseDouble(StrTemp);
+			Long.parseLong(StrTemp);
 			InputCheck = true;
 		} catch (NumberFormatException e){
 			InputCheck = false;
@@ -589,7 +577,7 @@ public class StoreDeliverIO {
 				System.out.println("물품 번호를 입력해주십시오[" + InputDeliver.getCode() + "]");
 				StrTemp = Input.nextLine();
 				try {
-					Double.parseDouble(StrTemp);
+					Long.parseLong(StrTemp);
 					InputCheck = true;
 				} catch (NumberFormatException e){
 					InputCheck = false;
@@ -719,7 +707,7 @@ public class StoreDeliverIO {
 			}
 		}
 
-		System.out.println("temp : " + temp + ", yn : " + yn);
+		// System.out.println("temp : " + temp + ", yn : " + yn);
 		if(yn == 'y' || yn == 'Y')
 			returnValue = true;
 		else if(yn == 'n' || yn == 'N')
