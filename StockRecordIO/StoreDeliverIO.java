@@ -3,9 +3,15 @@ package StockRecordIO;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+
+import DataManagement.StoreDeliverFile;
+
+import ProductManagement.ComparatorStore;
+import ProductManagement.ComparatorDeliver;
 import ProductManagement.Product;
 import ProductManagement.Store;
 import ProductManagement.Deliver;
@@ -14,9 +20,147 @@ public class StoreDeliverIO {
 	static public void main(String args[]) throws IOException, InterruptedException {
 		StoreDeliverIO io = new StoreDeliverIO();
 		io.StoreInput();
-		io.DeliverInput();
+		//io.DeliverInput();
+		//io.StoreOutput();
+		//io.DeliverOutput();
 	}
 
+	public void StoreOutput() { // 출력할 범위를 입력받은 뒤, 범위에 해당하는 물품에 대해 출력
+		Scanner Input = new Scanner(System.in);
+		String StartDate = null;
+		String EndDate = null;
+		String StrTemp = null;
+		boolean EndCheck = true;
+		Store[] List = null;
+		
+		StoreDeliverFile LoadStore = new StoreDeliverFile();
+		List = LoadStore._loadStoreFile();
+		
+		System.out.println("입고 기록의 출력 범위를 입력해주십시오(시작날짜) (정하지 않을 경우, '-' 입력)");
+		StrTemp = Input.nextLine();
+		while(checkDate(StrTemp) != true) {
+			if(StrTemp.equals("-"))
+				break;
+			System.out.println("Invaild Format. yyyy-MM-dd에 맞춰서 다시 입력해주십시오.");
+			StrTemp = Input.nextLine();
+		}
+		StartDate = StrTemp;
+		
+		System.out.println("입고 기록의 출력 범위를 입력해주십시오(마지막날짜) (정하지 않을 경우, '-' 입력)");
+		StrTemp = Input.nextLine();
+		while(checkDate(StrTemp) != true && EndCheck == true) {
+			if(StrTemp.equals("-"))
+				break;
+			System.out.println("Invaild Format. yyyy-MM-dd에 맞춰서 다시 입력해주십시오.");
+			StrTemp = Input.nextLine();
+		}
+		EndDate = StrTemp;
+		
+		if(StrTemp.compareTo(StartDate) < 0) {
+			System.err.println("범위 오류: 마지막 날짜가 시작 날짜보다 빠릅니다. 다시 출력하려면 처음부터 다시 진행하십시오.");
+			return;
+		}
+		
+		Arrays.sort(List, new ComparatorStore());
+		
+		// System.out.println("제품이름	입고량	입고일자	입고가	물품번호	거래처");
+
+		for(int i = 0; i < List.length; i++) {
+			if(StartDate.equals("-") == true) {
+				if(EndDate.equals("-") == true) { // 전체 범위
+					System.out.println(List[i].toString());
+				} else { // 처음부터 특정 날짜 까지
+					if(EndDate.compareTo(List[i].getStoreDate()) >= 0) {
+						System.out.println(List[i].toString());
+					} else {
+						continue;
+					}
+				}
+			} else if(EndDate.equals("-")) { // 특정 날짜부터 끝까지
+				if(StartDate.compareTo(List[i].getStoreDate()) <= 0) {
+					System.out.println(List[i].toString());
+				} else {
+					continue;
+				}
+			} else { // 특정 날짜 범위 내
+				if(EndDate.compareTo(List[i].getStoreDate()) >= 0 && StartDate.compareTo(List[i].getStoreDate()) <= 0) {
+					System.out.println(List[i].toString());
+				} else {
+					continue;
+				}
+			}
+		}
+		return;
+	}
+	
+	public void DeliverOutput() {
+		Scanner Input = new Scanner(System.in);
+		String StartDate = null;
+		String EndDate = null;
+		String StrTemp = null;
+		boolean EndCheck = true;
+		Deliver[] List = null;
+		
+		StoreDeliverFile LoadDeliver = new StoreDeliverFile();
+		List = LoadDeliver._loadDeliverFile();
+		
+		System.out.println("출고 기록의 출력 범위를 입력해주십시오(시작날짜) (정하지 않을 경우, '-' 입력)");
+		StrTemp = Input.nextLine();
+		while(checkDate(StrTemp) != true) {
+			if(StrTemp.equals("-"))
+				break;
+			System.out.println("Invaild Format. yyyy-MM-dd에 맞춰서 다시 입력해주십시오.");
+			StrTemp = Input.nextLine();
+		}
+		StartDate = StrTemp;
+		
+		System.out.println("출고 기록의 출력 범위를 입력해주십시오(마지막날짜) (정하지 않을 경우, '-' 입력)");
+		StrTemp = Input.nextLine();
+		while(checkDate(StrTemp) != true && EndCheck == true) {
+			if(StrTemp.equals("-"))
+				break;
+			System.out.println("Invaild Format. yyyy-MM-dd에 맞춰서 다시 입력해주십시오.");
+			StrTemp = Input.nextLine();
+		}
+		EndDate = StrTemp;
+		
+		if(StrTemp.compareTo(StartDate) < 0) {
+			System.err.println("범위 오류: 마지막 날짜가 시작 날짜보다 빠릅니다. 다시 출력하려면 처음부터 다시 진행하십시오.");
+			return;
+		}
+		
+		Arrays.sort(List, new ComparatorDeliver());
+		
+		// System.out.println("제품이름	출고량	출고일자	출고가	물품번호	거래처");
+		
+		for(int i = 0; i < List.length; i++) {
+			if(StartDate.equals("-") == true) {
+				if(EndDate.equals("-") == true) { // 전체 범위
+					System.out.println(List[i].toString());
+				} else { // 처음부터 특정 날짜 까지
+					if(EndDate.compareTo(List[i].getDeliverDate()) >= 0) {
+						System.out.println(List[i].toString());
+					} else {
+						continue;
+					}
+				}
+			} else if(EndDate.equals("-")) { // 특정 날짜부터 끝까지
+				if(StartDate.compareTo(List[i].getDeliverDate()) <= 0) {
+					System.out.println(List[i].toString());
+				} else {
+					continue;
+				}
+			} else { // 특정 날짜 범위 내
+				if(EndDate.compareTo(List[i].getDeliverDate()) >= 0 && StartDate.compareTo(List[i].getDeliverDate()) <= 0) {
+					System.out.println(List[i].toString());
+				} else {
+					continue;
+				}
+			}
+		}
+		return;
+	}
+	
 	public void StoreInput() throws IOException, InterruptedException {
 		Store InputStore = new Store();
 		Scanner Input = new Scanner(System.in);
@@ -28,12 +172,29 @@ public class StoreDeliverIO {
 		int Inadequate = 0;
 		boolean InputCheck = true; // 입력값 유효성 여부 및 최종 확인용
 		
-		System.out.println("상품 이름을 입력해주십시오");
-		InputStore.setName(Input.nextLine());
-		System.out.println("거래처명을 입력해주십시오");
-		InputStore.setClient(Input.nextLine());
-		System.out.println("창고이름 또는 위치를 입력해주십시오");
-		Container = new String(Input.nextLine());
+		System.out.println("상품 이름을 입력해주십시오('|' 입력 불가)");
+		StrTemp = Input.nextLine();
+		while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+			System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+			StrTemp = Input.nextLine();
+		}
+		InputStore.setName(StrTemp);
+		
+		System.out.println("거래처명을 입력해주십시오('|' 입력 불가)");
+		StrTemp = Input.nextLine();
+		while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+			System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+			StrTemp = Input.nextLine();
+		}
+		InputStore.setClient(StrTemp);
+		
+		System.out.println("창고이름 또는 위치를 입력해주십시오('|' 입력 불가)");
+		StrTemp = Input.nextLine();
+		while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+			System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+			StrTemp = Input.nextLine();
+		}
+		Container = new String(StrTemp);
 		
 		System.out.println("입고일자를 입력해주십시오(yyyy-MM-dd)");
 		StrTemp = Input.nextLine();
@@ -63,10 +224,10 @@ public class StoreDeliverIO {
 		}
 		InputStore.setCode(StrTemp);
 		
-		System.out.println("유통기한을 입력해주십시오(yyyy-MM-dd) (없는 제품이면 '0000-00-00'을 입력해주십시오)");
+		System.out.println("유통기한을 입력해주십시오(yyyy-MM-dd) (없는 제품이면 '-'을 입력해주십시오)");
 		StrTemp = Input.nextLine();
 		while(checkDate(StrTemp) != true) {
-			if(StrTemp.equals("0000-00-00"))
+			if(StrTemp.equals("-"))
 				break;
 			System.out.println("Invaild Format. yyyy-MM-dd에 맞춰서 다시 입력해주십시오.");
 			StrTemp = Input.nextLine();
@@ -155,14 +316,33 @@ public class StoreDeliverIO {
 			// 다시 입력받아서 확인
 			while(!(InputCheck)) {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-				System.out.println("상품 이름을 입력해주십시오[" + InputStore.getName() + "]");
-				InputStore.setName(Input.nextLine());
-				System.out.println("거래처명을 입력해주십시오[" + InputStore.getClient() + "]");
-				InputStore.setClient(Input.nextLine());
-				System.out.println("창고이름 또는 위치를 입력해주십시오[" + Container + "]");
-				Container = new String(Input.nextLine());
 				
-				System.out.println("입고일자를 입력해주십시오(yyyy-MM-dd)[" + InputStore.getDate() + "]");
+				System.out.println("상품 이름을 입력해주십시오('|' 입력 불가)[" + InputStore.getName() + "]");
+				StrTemp = Input.nextLine();
+				while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+					System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+					StrTemp = Input.nextLine();
+				}
+				InputStore.setName(StrTemp);
+				
+				System.out.println("거래처명을 입력해주십시오('|' 입력 불가)[" + InputStore.getClient() + "]");
+				StrTemp = Input.nextLine();
+				while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+					System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+					StrTemp = Input.nextLine();
+				}
+				InputStore.setClient(StrTemp);
+				
+				System.out.println("창고이름 또는 위치를 입력해주십시오('|' 입력 불가)[" + Container + "]");
+				StrTemp = Input.nextLine();
+				while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+					System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+					StrTemp = Input.nextLine();
+				}
+				Container = new String(StrTemp);
+				
+				
+				System.out.println("입고일자를 입력해주십시오(yyyy-MM-dd)[" + InputStore.getStoreDate() + "]");
 				StrTemp = Input.nextLine();
 				while(checkDate(StrTemp) != true) {
 					System.out.println("Invaild Format. yyyy-MM-dd에 맞춰서 다시 입력해주십시오.");
@@ -173,7 +353,7 @@ public class StoreDeliverIO {
 				System.out.println("바코드번호를 입력해주십시오[" + InputStore.getCode() + "]");
 				StrTemp = Input.nextLine();
 				try {
-					Double.parseDouble(StrTemp);
+					Long.parseLong(StrTemp);
 					InputCheck = true;
 				} catch (NumberFormatException e){
 					InputCheck = false;
@@ -292,10 +472,22 @@ public class StoreDeliverIO {
 		int IntTemp = 0;
 		boolean InputCheck = true; // 입력값 유효성 여부 및 최종 확인용
 		
-		System.out.println("상품 이름을 입력해주십시오");
-		InputDeliver.setName(Input.nextLine());
-		System.out.println("거래처명을 입력해주십시오");
-		InputDeliver.setClient(Input.nextLine());
+		
+		System.out.println("상품 이름을 입력해주십시오('|' 입력 불가)");
+		StrTemp = Input.nextLine();
+		while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+			System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+			StrTemp = Input.nextLine();
+		}
+		InputDeliver.setName(StrTemp);
+		
+		System.out.println("거래처명을 입력해주십시오('|' 입력 불가)");
+		StrTemp = Input.nextLine();
+		while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+			System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+			StrTemp = Input.nextLine();
+		}
+		InputDeliver.setClient(StrTemp);
 		
 		System.out.println("출고일자를 입력해주십시오(yyyy-MM-dd)");
 		StrTemp = Input.nextLine();
@@ -369,12 +561,24 @@ public class StoreDeliverIO {
 			// 다시 입력받아서 확인
 			while(!(InputCheck)) {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-				System.out.println("상품 이름을 입력해주십시오[" + InputDeliver.getName() + "]");
-				InputDeliver.setName(Input.nextLine());
-				System.out.println("거래처명을 입력해주십시오[" + InputDeliver.getClient() + "]");
-				InputDeliver.setClient(Input.nextLine());
+
+				System.out.println("상품 이름을 입력해주십시오('|' 입력 불가)[" + InputDeliver.getName() + "]");
+				StrTemp = Input.nextLine();
+				while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+					System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+					StrTemp = Input.nextLine();
+				}
+				InputDeliver.setName(StrTemp);
 				
-				System.out.println("출고일자를 입력해주십시오(yyyy-MM-dd)[" + InputDeliver.getDate() + "]");
+				System.out.println("거래처명을 입력해주십시오('|' 입력 불가)[" + InputDeliver.getClient() + "]");
+				StrTemp = Input.nextLine();
+				while(StrTemp.length() > 100 || (StrTemp.indexOf("|") > -1)) {
+					System.out.println("Invaild Format. 100자 이내로 '|' 없이 다시 입력해주십시오.");
+					StrTemp = Input.nextLine();
+				}
+				InputDeliver.setClient(StrTemp);
+				
+				System.out.println("출고일자를 입력해주십시오(yyyy-MM-dd)[" + InputDeliver.getDeliverDate() + "]");
 				StrTemp = Input.nextLine();
 				while(checkDate(StrTemp) != true) {
 					System.out.println("Invaild Format. yyyy-MM-dd에 맞춰서 다시 입력해주십시오.");
@@ -444,6 +648,12 @@ public class StoreDeliverIO {
 				InputCheck = checkDeliverInput(InputDeliver);
 			}
 		}
+		
+		if(InputDeliver.inputDeliver() == false) {
+			System.out.println("출고기록 확인 에러. 출고 기록 데이터를 적용할 물품 데이터가 존재하지 않습니다. 처음부터 다시 입력해주십시오.");
+		} else {
+			System.out.println("출고기록 저장 성공. 물품 데이터에 성공적으로 출고 기록 데이터가 적용되었습니다.");
+		}
 		// 물품번호 확인해서 물품 없으면 반영안하고 종료
 		// 아니면 반영
 	}
@@ -472,7 +682,7 @@ public class StoreDeliverIO {
 		System.out.println("입력하신 입고 기록입니다.");
 		System.out.println("제품이릉: " + InputStore.getName());
 		System.out.println("입고량: " + InputStore.getAmount());
-		System.out.println("입고일자: " + InputStore.getDate());
+		System.out.println("입고일자: " + InputStore.getStoreDate());
 		System.out.println("입고가: " + InputStore.getPrice());
 		System.out.println("바코드번호: " + InputStore.getCode());
 		System.out.println("거래처: " + InputStore.getClient());
@@ -493,7 +703,7 @@ public class StoreDeliverIO {
 				System.out.println("입력하신 입고 기록입니다.");
 				System.out.println("제품이릉: " + InputStore.getName());
 				System.out.println("입고량: " + InputStore.getAmount());
-				System.out.println("입고일자: " + InputStore.getDate());
+				System.out.println("입고일자: " + InputStore.getStoreDate());
 				System.out.println("입고가: " + InputStore.getPrice());
 				System.out.println("바코드번호: " + InputStore.getCode());
 				System.out.println("거래처: " + InputStore.getClient());
@@ -528,7 +738,7 @@ public class StoreDeliverIO {
 		System.out.println("입력하신 출고 기록입니다.");
 		System.out.println("제품이릉: " + InputStore.getName());
 		System.out.println("출고량: " + InputStore.getAmount());
-		System.out.println("출고일자: " + InputStore.getDate());
+		System.out.println("출고일자: " + InputStore.getDeliverDate());
 		System.out.println("출고가: " + InputStore.getPrice());
 		System.out.println("물품번호: " + InputStore.getCode());
 		System.out.println("거래처: " + InputStore.getClient());
@@ -544,7 +754,7 @@ public class StoreDeliverIO {
 				System.out.println("입력하신 출고 기록입니다.");
 				System.out.println("제품이릉: " + InputStore.getName());
 				System.out.println("출고량: " + InputStore.getAmount());
-				System.out.println("출고일자: " + InputStore.getDate());
+				System.out.println("출고일자: " + InputStore.getDeliverDate());
 				System.out.println("출고가: " + InputStore.getPrice());
 				System.out.println("물품번호: " + InputStore.getCode());
 				System.out.println("거래처: " + InputStore.getClient());
