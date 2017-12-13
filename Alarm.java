@@ -29,7 +29,8 @@ public class Alarm {
 	private Boolean BadSellerState;
 	private Date CurrDate;
 	private Date ExDate;
-	private ProductList Pl;				// 재고 목록
+	private ProductList PL;				// 재고 목록
+	private Product[] Pl;	
 	private Store Str;
 	private Deliver Dlv;
 	private AlarmUI AUI;
@@ -43,9 +44,9 @@ public class Alarm {
 		setState(ShortageState, SuddenIncreaseState, ExpirationState, BadSellerState);
 	}
 	
-	public Alarm(ProductList Pl, Store Str, Deliver Dlv)
+	public Alarm(ProductList PL, Store Str, Deliver Dlv)
 	{
-		if(Pl == null)
+		if(PL == null)
 		{
 			System.out.println("Error: null PRODUCT LIST object");
 			System.exit(0);
@@ -60,11 +61,13 @@ public class Alarm {
 			System.out.println("Error: null DELIVER object");
 			System.exit(0);
 		}
-		this.Pl = Pl;
+		this.PL = PL;
 		this.Str = Str;
 		this.Dlv = Dlv;
 		setState(ShortageState, SuddenIncreaseState, ExpirationState, BadSellerState);
 		setBarcode("", "");
+		this.Pl = PL.getProductList();
+		//this.AUI = new AlarmUI();
 	}
 	
 	public void setAmount(int DailyDeliverAmount, int TotalAmount, int TotalStoreAmount, int MonthlyStoreAmount)
@@ -88,9 +91,14 @@ public class Alarm {
 	}
 	public void callAlarm()
 	{
+		AUI = new AlarmUI();
+		AUI.readyToShortage();
 		shortageOfGoods();
+		AUI.readyToSuddenIncrease();
 		suddenIncrease();
+		AUI.readyToExpiration();
 		expiration();
+		AUI.readyToBadSeller();
 		badSeller();
 	}
 	public void shortageOfGoods()	// 재고 부족, 바코드
@@ -116,7 +124,7 @@ public class Alarm {
 			if(TotalAmount < CriteriaOfShortage)
 				ShortageState = true;
 			// 만약 true면 출력
-			AUI.printShortage(ShortageState, Pl[i].getName(), Barcode, TotalAmount, Str.getTotalStoreAmount(Barcode));
+			AUI.printShortage(ShortageState, Pi[i].getName(), Barcode, TotalAmount, Str.getTotalStoreAmount(Barcode));
 			// state 초기화
 			ShortageState = false;
 		}
@@ -131,13 +139,13 @@ public class Alarm {
 			if(Pl[i].getDiscount() != 0)
 				continue;
 			Barcode = Pl[i].getBarcode();
-			if(!Barcode.equals(PrevBarcode))
+			if(!Barcode.equals(PrevBarcode))	//compare
 				continue;
 			PrevBarcode = Pl[i].getBarcode();
 			// 하루 출고량 받기(는 사실 어제 꺼게찌..)
 			DailyDeliverAmount = Dlv.getDailyDeliverAmount(Barcode);
 			// 어제 재고량 받기
-			TotalAmount = Pl.getTotalAmount(Barcode);
+			TotalAmount = PL.getTotalAmount(Barcode);
 			// 하루 출고량이 재고량의 20퍼 이상인가?
 			if(DailyDeliverAmount >= (TotalAmount * 0.2))
 				SuddenIncreaseState = true;
@@ -173,7 +181,7 @@ public class Alarm {
 			catch(ParseException e)
 			{
 				e.printStackTrace();
-			}
+			}pu
 			// 유통 기한 - 현재 날짜
 			long diffday = (ExDate.getTime() - CurrDate.getTime()) / (24 * 60 * 60 * 1000);
 			// 60 일 이하 남으면

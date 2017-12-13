@@ -40,11 +40,27 @@ public class AlarmUI {
 	}
 
 	//ShortageState, Pl.getName(), Barcode, Str.getTotalAmount()
+	public void readyToShortage()
+	{
+		System.out.println("재고 부족 기준량을 만족하는 상품입니다.");
+	}
+	public void readyToSuddenIncrease()
+	{
+		System.out.println("판매량 급증을 만족하는 상품입니다.");
+	}
+	public void readyToExpiration()
+	{
+		System.out.println("남은 유통기한이 60일 이하인 상품입니다.");
+	}
+	public void readyToBadSeller()
+	{
+		System.out.println("제품이 안 팔리는 기준을 만족하는 상품입니다.");
+	}
 	public void printShortage(boolean state, String Name, String Barcode, int TotalAmount, int TotalStoreAmount)
 	{
 		if(state)
 		{
-			System.out.println("물품이름: " + Name);
+			System.out.println("상품이름: " + Name);
 			System.out.println("바코드 번호 " + Barcode);
 			System.out.println("재고 계: " + TotalAmount);
 			System.out.println("입고 계: " + TotalStoreAmount);
@@ -55,7 +71,7 @@ public class AlarmUI {
 	{
 		if(state)
 		{
-			System.out.println("물품이름: " + Name);
+			System.out.println("상품이름: " + Name);
 			System.out.println("바코드 번호 " + Barcode);
 			System.out.println("재고 계: " + TotalAmount);
 			System.out.println("입고 계: " + TotalStoreAmount);
@@ -67,7 +83,7 @@ public class AlarmUI {
 	{
 		if(state)
 		{
-			System.out.println("물품이름: " + Name);
+			System.out.println("상품이름: " + Name);
 			System.out.println("바코드 번호 " + Barcode);
 			System.out.println("물품 번호: " + ProductCode);
 			System.out.println("유통 기한: " + ExpirationDate);
@@ -79,7 +95,7 @@ public class AlarmUI {
 	{
 		if(state)
 		{
-			System.out.println("물품이름: " + Name);
+			System.out.println("상품이름: " + Name);
 			System.out.println("바코드 번호 " + Barcode);
 			System.out.println("재고 계: " + TotalAmount);
 			System.out.println("입고 계: " + TotalStoreAmount);
@@ -87,5 +103,6 @@ public class AlarmUI {
 			System.out.println("");
 		}
 	}
+
 	
 }
